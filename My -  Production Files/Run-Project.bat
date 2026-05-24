@@ -1,18 +1,25 @@
 @echo off
+setlocal
+
 echo ========================================================
-echo Starting DreamCollege Local Server
+echo Starting College Recommendation Demo
 echo ========================================================
 echo.
-echo This script starts a local server to prevent browser CORS
-echo security errors when loading the local database JSON files.
+
+echo Starting backend API...
+start cmd /k "cd ..\college-cds-api-main\api && npm run docker:start"
+
+echo Waiting for API to become ready (approx 10 seconds)...
+timeout /t 10 /nobreak > nul
+
 echo.
-echo Starting Python HTTP Server on port 8000...
-start "DreamCollege Server" cmd /c "python -m http.server 8000"
-timeout /t 2 >nul
+echo Opening College-List-Demo.html in default browser...
+start College-List-Demo.html
+
 echo.
-echo Opening browser...
-start http://localhost:8000/College-List-Demo.html
-echo.
-echo Note: Keep the other black command window open while testing!
-echo Press any key to exit this script.
-pause >nul
+echo ========================================================
+echo Application is running.
+echo To view API logs, check the newly opened terminal window.
+echo Close this window if you wish, or keep it open for reference.
+echo ========================================================
+pause
