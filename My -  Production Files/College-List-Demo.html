@@ -2825,10 +2825,7 @@
         </div>
     </div>
 
-    <script src="database/api_client.js"></script>
     <script>
-        // Initialize the Database API with our mock API Key
-        const dbAPI = new DreamCollegeAPI("DREAM_COLLEGE_API_v1_847294");
         var sidebar = document.getElementById('sidebar');
         var collapseBtn = document.getElementById('collapseSidebarBtn');
         var collegePlanningToggle = document.getElementById('collegePlanningToggle');
@@ -2923,22 +2920,22 @@
         });
 
         // ── Dynamic JSON Fetching ────────────────────────────────────────────────
-        const schoolDataFiles = {
-            'ut': 'UniversityOfTexasAustin_CDS_2024-2025.json',
-            'tam': 'TexasAMUniversity_CDS_2024-2025.json',
-            'usc': 'UniversityOfSouthCarolina_CDS_2024-2025.json',
-            'umich': 'UniversityOfMichigan_CDS_2025-2026.json',
-            'iu': 'IndianaUniversityBloomington_CDS_2024-2025.json',
-            'upenn': 'UniversityOfPennsylvania_CDS_2024-2025.json',
-            'harvard': 'HarvardUniversity_CDS_2024-2025.json',
-            'stanford': 'StanfordUniversity_CDS_2024-2025.json',
-            'nyu': 'NewYorkUniversity_CDS_2025-2026.json',
-            'yale': 'YaleUniversity_CDS_2025-2026.json',
-            'princeton': 'PrincetonUniversity_CDS_2025-2026.json',
-            'mit': 'MassachusettsInstituteOfTechnology_CDS_2024-2025.json',
-            'jhu': 'JohnsHopkinsUniversity_CDS_2025-2026.json',
-            'uchicago': 'UniversityOfChicago_CDS_2024-2025.json',
-            'ucb': 'UCBerkeley_CDS_2025-2026.json'
+        const schoolIpedsIds = {
+            'ut': '228778',
+            'tam': '228723',
+            'usc': '218663',
+            'umich': '170976',
+            'iu': '151351',
+            'upenn': '215062',
+            'harvard': '166027',
+            'stanford': '243744',
+            'nyu': '193900',
+            'yale': '130794',
+            'princeton': '186131',
+            'mit': '166683',
+            'jhu': '162928',
+            'uchicago': '144050',
+            'ucb': '110635'
         };
 
         const FC = {
@@ -2952,13 +2949,21 @@
         const CAT_C = { 'Essays': '#7c3aed', 'Test Scores': '#1d4ed8', 'Extracurriculars': '#059669', 'Application Strategy': '#991b1b', 'Academics': '#0369a1', 'Recommendations': '#6d28d9' };
 
         async function fetchSchoolData(schoolId) {
-            const fileName = schoolDataFiles[schoolId];
-            if (!fileName) return; // Silent return if we don't have json for this school yet
+            const ipedsId = schoolIpedsIds[schoolId];
+            if (!ipedsId) return;
 
             try {
-                // Fetch using our Database API Client
-                const data = await dbAPI.getSchool(fileName);
-                renderSchoolData(data);
+                const response = await fetch(`http://localhost:8080/v1/schools/${ipedsId}?api_key=dev-key-change-me`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                if (data.results && data.results.length > 0) {
+                    renderSchoolData(data.results[0]);
+                } else {
+                    console.error("No data found for school:", schoolId);
+                }
             } catch (error) {
                 console.error("Failed to fetch school data:", error);
             }
