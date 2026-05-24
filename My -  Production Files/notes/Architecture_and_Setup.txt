@@ -1,0 +1,49 @@
+======================================================
+College Recommendation Dashboard - Architecture & Setup
+======================================================
+
+1. Overview
+-----------
+This project is a College Recommendation Dashboard that displays data about various universities.
+The system consists of two main components:
+- A Frontend UI: A single HTML file (`College-List-Demo.html`) with embedded CSS and JS.
+- A Backend API: A Dockerized Node.js + Express + SQLite API that serves Common Data Set (CDS) data.
+
+2. Architecture
+---------------
+- Frontend (`My - Production Files`):
+  - `College-List-Demo.html`: The main UI. It dynamically renders a list of universities by mapping arbitrary string IDs to 6-digit IPEDS IDs.
+  - `assets/`: Contains logo images for each university (PNG files).
+  - `Run-Project.bat`: A convenient batch script to spin up the API and launch the frontend.
+
+- Backend (`college-cds-api-main/api`):
+  - Exposes RESTful endpoints (e.g., `GET /v1/schools/{ipeds_id}`).
+  - Uses an embedded SQLite database (`cds_data` volume) populated at build time.
+  - The source of truth for university data is located in `college-cds-api-main/data/input/`.
+  - JSON files in the `data/input/` directory are loaded into the SQLite database during the Docker build process (`npm run docker:start`).
+
+3. Data Flow
+------------
+1. Data ingested: `*.json` files in `data/input/` are copied to `api/seed/` and loaded into SQLite when the Docker image is built.
+2. User opens the UI: The HTML file executes a JavaScript function to fetch data.
+3. Fetch request: The UI sends an HTTP GET request to `http://localhost:8080/v1/schools/{ipeds_id}?api_key=dev-key-change-me`.
+4. API response: The Node.js API queries SQLite and returns the data wrapped in a JSON envelope (`{ metadata: {...}, results: [{...}] }`).
+5. UI rendering: The JavaScript unwraps `data.results[0]` and dynamically populates the HTML DOM with the school's information.
+
+4. How to Run (For Non-Technical Users)
+---------------------------------------
+Simply double-click the `Run-Project.bat` file located in the `My - Production Files` folder.
+This script will:
+1. Open a terminal window and start the Dockerized API backend.
+2. Wait a few seconds for the API to fully start.
+3. Automatically open `College-List-Demo.html` in your default web browser.
+
+Note: Docker Desktop must be running on your machine for the API to work.
+
+5. Adding/Modifying Universities
+--------------------------------
+To add new schools or update existing data:
+1. Add or modify the corresponding JSON files inside `college-cds-api-main/data/input/`.
+2. Ensure the JSON format matches the CDS Schema (needs `cds_meta.ipeds_id` and `cds_meta.school_name`).
+3. Add a corresponding logo PNG image in `My - Production Files/assets/`.
+4. Run `Run-Project.bat` (this triggers a rebuild of the Docker image, seeding the new data).
