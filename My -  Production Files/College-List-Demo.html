@@ -2453,7 +2453,7 @@
 
 
                             <div class="category-header" style="margin-top: 32px;">
-                                <div class="ball-yellow"></div>
+                                <div class="ball-blue"></div>
                                 Target Schools
                             </div>
 
@@ -3079,7 +3079,6 @@
             };
 
             // Dynamically set logo based on school name
-            const schoolId = meta.school_name.toLowerCase().replace(/ /g, '-').replace(/,/g, '').replace(/&/g, 'and');
             logoLg.src = `assets/${schoolId}.png`;
             logoLg.onerror = function() {
                 this.src = `https://placehold.co/130x130/5B2BE0/ffffff?text=${meta.school_name.charAt(0)}`;
@@ -3209,10 +3208,6 @@
                   <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
                     <svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="46" fill="none" stroke="#f1f5f9" stroke-width="9"/><circle cx="55" cy="55" r="46" fill="none" stroke="#d8b4fe" stroke-width="9" stroke-dasharray="289.0" stroke-dashoffset="${(289 * (1 - o.grad_rate_4yr / 100)).toFixed(1)}" stroke-linecap="round" transform="rotate(-90 55 55)"/><text x="55" y="50" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="18" font-weight="800" fill="#1e293b">${o.grad_rate_4yr}%</text><text x="55" y="66" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">4 years</text></svg>
                     <div style="font-size:11px;color:#64748b;text-align:center;font-family:monospace">4-year rate</div>
-                  </div>
-                  <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
-                    <svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="46" fill="none" stroke="#f1f5f9" stroke-width="9"/><circle cx="55" cy="55" r="46" fill="none" stroke="#a855f7" stroke-width="9" stroke-dasharray="289.0" stroke-dashoffset="${(289 * (1 - o.grad_rate_5yr / 100)).toFixed(1)}" stroke-linecap="round" transform="rotate(-90 55 55)"/><text x="55" y="50" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="18" font-weight="800" fill="#1e293b">${o.grad_rate_5yr}%</text><text x="55" y="66" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">5 years</text></svg>
-                    <div style="font-size:11px;color:#64748b;text-align:center;font-family:monospace">5-year rate</div>
                   </div>
                   <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
                     <svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="46" fill="none" stroke="#f1f5f9" stroke-width="9"/><circle cx="55" cy="55" r="46" fill="none" stroke="#5B2BE0" stroke-width="9" stroke-dasharray="289.0" stroke-dashoffset="${(289 * (1 - o.grad_rate_6yr / 100)).toFixed(1)}" stroke-linecap="round" transform="rotate(-90 55 55)"/><text x="55" y="50" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="18" font-weight="800" fill="#1e293b">${o.grad_rate_6yr}%</text><text x="55" y="66" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">6 years</text></svg>
