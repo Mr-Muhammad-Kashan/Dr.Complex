@@ -12,7 +12,8 @@ echo.
 echo Starting backend API natively...
 :: We must provide these environment variables, otherwise the node server crashes!
 set API_KEY=dev-key-change-me
-set INGEST_DIR=../../data/input
+:: In Windows, when we 'cd' into college-cds-api-main\api, the relative path to data\input is ..\data\input
+set INGEST_DIR=..\data\input
 set PORT=8080
 
 start cmd /k "cd ..\college-cds-api-main\api && npm install && node --no-warnings=ExperimentalWarning src/ingest.js && node --no-warnings=ExperimentalWarning src/server.js"

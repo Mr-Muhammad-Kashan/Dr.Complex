@@ -3073,29 +3073,13 @@
             const logoLg = document.querySelector('.school-logo-large');
             // Dynamically set logo based on school name
             const schoolId = meta.school_name.toLowerCase().replace(/ /g, '-').replace(/,/g, '').replace(/&/g, 'and');
-            logoLg.src = `assets/${schoolId}.png`;
-            logoLg.onerror = function() {
-                this.src = `https://placehold.co/130x130/5B2BE0/ffffff?text=${meta.school_name.charAt(0)}`;
-            };
+            if (logoLg) {
+                logoLg.src = `assets/${schoolId}.png`;
+                logoLg.onerror = function() {
+                    this.src = `https://placehold.co/130x130/5B2BE0/ffffff?text=${meta.school_name.charAt(0)}`;
+                };
+            }
 
-            // Dynamically set logo based on school name
-            logoLg.src = `assets/${schoolId}.png`;
-            logoLg.onerror = function() {
-                this.src = `https://placehold.co/130x130/5B2BE0/ffffff?text=${meta.school_name.charAt(0)}`;
-            };
-
-            const schoolLogoMap = {
-                'University of Texas at Austin': 'assets/University of Texas at Austin.png',
-                'Texas A&M University': 'assets/Texas A&M University.png',
-                'University of South Carolina': 'assets/University of South Carolina.jpg',
-                'University of Michigan, Ann Arbor': 'assets/University of Michigan, Ann Arbor.png',
-                'University of Michigan': 'assets/University of Michigan, Ann Arbor.png',
-                'Indiana University Bloomington': 'assets/Indiana University Bloomington.png',
-                'University of Pennsylvania': 'assets/University of Pennsylvania.jpg',
-                'Harvard University': 'assets/Harvard University.jpg',
-                'Stanford University': 'assets/Stanford University.jpg'
-            };
-            if (logoLg) logoLg.src = schoolLogoMap[meta.school_name] || meta.logo_url || '';
             const titleH2 = document.querySelector('.details-title-area h2');
             if (titleH2) titleH2.textContent = meta.school_name;
             const metaLg = document.querySelector('.school-meta-large');
