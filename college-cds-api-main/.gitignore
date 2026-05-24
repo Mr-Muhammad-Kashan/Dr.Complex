@@ -1,0 +1,42 @@
+# Environment / secrets — matches .env at any depth (root or under api/)
+.env
+.env.local
+.env.*.local
+
+# Design assets / source data folder — excluded from version control.
+# Note: api/scripts/start.sh stages JSONs from here into api/seed/ before docker build,
+# so a fresh clone will need this folder restored from elsewhere to seed the DB.
+College API Design/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build / test artifacts
+coverage/
+.vitest-cache/
+*.log
+
+# SQLite (local, non-docker runs)
+data/*
+*.db
+*.db-journal
+
+# Track the data/input/ folder skeleton (README + .gitkeep) but not the JSONs in it.
+# data/input/ is the deployment-time source of truth for school records.
+!data/input/
+data/input/*
+!data/input/README.md
+!data/input/.gitkeep
+
+# Generated seed staging (populated by scripts/start.sh)
+api/seed/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp

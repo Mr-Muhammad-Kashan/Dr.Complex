@@ -1,0 +1,140 @@
+{
+  "cds_meta": {
+    "school_name": "Stanford University",
+    "ipeds_id": "243744",
+    "cds_year": "2024-2025",
+    "source_filename": "StanfordUniversity_CDS_2024-2025.pdf",
+    "ingested_at": "2026-05-19T19:30:00.000000+00:00",
+    "confidence": "high",
+    "missing_sections": [],
+    "notes": "Test-optional. 50.3% submitted SAT, 19% submitted ACT. Class of 2028.",
+    "location": "Stanford, California",
+    "ranking": "#3 National Ranking",
+    "admission_rate_display": "4%",
+    "website": "https://www.stanford.edu",
+    "logo_url": "https://placehold.co/130x130/8C1515/ffffff?text=S",
+    "logo_mini_url": "https://placehold.co/80x80/8C1515/ffffff?text=S",
+    "category": "reach"
+  },
+  "cds_admissions": {
+    "class_size": {
+      "applicants_total": 52264,
+      "applicants_men": 28663,
+      "applicants_women": 28663,
+      "applicants_other_gender": null,
+      "admitted_total": 1693,
+      "admitted_men": 992,
+      "admitted_women": 1075,
+      "enrolled_total": 1444,
+      "enrolled_men": 813,
+      "enrolled_women": 880,
+      "acceptance_rate": 0.0324,
+      "yield_rate": 0.853
+    },
+    "early_programs": {
+      "early_decision": {
+        "offered": false,
+        "deadline": null,
+        "applicants": null,
+        "admitted": null,
+        "acceptance_rate": null
+      },
+      "early_action": {
+        "offered": true,
+        "restrictive": true,
+        "deadline": "11/1",
+        "notification_date": "12/13",
+        "applicants": null,
+        "admitted": null,
+        "acceptance_rate": null
+      }
+    },
+    "factors": {
+      "rigor_of_secondary_record": "very_important",
+      "class_rank": "considered",
+      "academic_gpa": "very_important",
+      "standardized_test_scores": "considered",
+      "application_essay": "very_important",
+      "recommendation": "important",
+      "interview": "considered",
+      "extracurricular_activities": "very_important",
+      "talent_ability": "very_important",
+      "character_personal_qualities": "very_important",
+      "first_generation": "important",
+      "alumni_relation": "considered",
+      "geographical_residence": "considered",
+      "state_residency": "not_considered",
+      "religious_affiliation": "not_considered",
+      "volunteer_work": "considered",
+      "work_experience": "considered",
+      "level_of_applicant_interest": "not_considered"
+    },
+    "test_scores": {
+      "test_policy": "test_optional",
+      "sat_erw_25th": 740,
+      "sat_erw_75th": 780,
+      "sat_math_25th": 770,
+      "sat_math_75th": 800,
+      "sat_composite_25th": 1470,
+      "sat_composite_75th": 1580,
+      "act_composite_25th": 33,
+      "act_composite_75th": 35,
+      "pct_submitting_sat": 50.3,
+      "pct_submitting_act": 19
+    },
+    "gpa_distribution": {
+      "gpa_4_0_and_above": 73.3,
+      "gpa_3_75_to_3_99": 19.5,
+      "gpa_3_50_to_3_74": 4.5,
+      "gpa_3_25_to_3_49": 1.5,
+      "gpa_3_0_to_3_24": 0.7,
+      "gpa_2_50_to_2_99": 0.3,
+      "gpa_2_0_to_2_49": 0.1,
+      "gpa_below_2_0": 0.1,
+      "gpa_weighted": false,
+      "avg_gpa": 4
+    }
+  },
+  "cds_academics": {
+    "student_faculty_ratio": 6,
+    "calendar_system": "Quarter",
+    "institution_type": "Private (nonprofit)",
+    "undergrad_enrollment": 7206,
+    "total_enrollment": 17680,
+    "setting": "Suburban",
+    "pct_freshmen_on_campus": 100,
+    "pct_all_undergrads_on_campus": 93
+  },
+  "cds_financials": {
+    "expenses": {
+      "tuition_instate": null,
+      "tuition_outofstate": 65127,
+      "required_fees": 2103,
+      "room_and_board": 20955,
+      "books_supplies": 1155,
+      "total_coa_instate": null,
+      "total_coa_outofstate": 91740,
+      "coa_derived": true
+    },
+    "financial_aid": {
+      "pct_freshmen_with_need": 49,
+      "pct_need_fully_met": 100,
+      "avg_pct_of_need_met": 100,
+      "avg_need_based_aid_package": 62125,
+      "avg_need_based_scholarship": 68400,
+      "avg_need_based_self_help": 3100,
+      "avg_need_based_loan": 2800,
+      "pct_freshmen_no_need_receiving_merit": 0,
+      "avg_merit_scholarship_no_need": 0,
+      "hfai_note": "Families with income <$100K and assets <$200K: tuition, room, and board free. Income <$65K: entire COA covered."
+    }
+  },
+  "cds_outcomes": {
+    "retention_rate_fulltime": 98.2,
+    "grad_rate_4yr": 0.99,
+    "grad_rate_5yr": 93.8,
+    "grad_rate_6yr": 0.99,
+    "transfer_out_rate": null,
+    "cohort_year": 2018
+  }
+}

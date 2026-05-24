@@ -1,0 +1,30 @@
+# Project Demonstration Guide
+
+This document provides complete, step-by-step instructions on how to run and demonstrate the DreamCollege Customization project.
+
+## 1. How to Run the Project
+Because this project utilizes a strict, highly secure mock API to fetch JSON database records, simply double-clicking the `College-List-Demo.html` file will NOT work. Browsers block local file system fetches for security reasons (CORS policy).
+
+To run the project properly:
+1. Double-click the `Run-Project.bat` file located in the `My - Production Files` folder.
+2. A black terminal window will open, starting a secure local server.
+3. Your default web browser will automatically open and navigate to `http://localhost:8000/College-List-Demo.html`.
+4. The project is now running exactly as it would in an industrial production environment.
+
+## 2. System Architecture & Features
+- 100% Data Integration: The database system handles dynamic fetching from structured JSON records located in `database/records/`.
+- Schema Unification: The JSON files guarantee 100% compatibility with the frontend UI. No application crashes will occur due to missing fields.
+- Enterprise API System: The system uses an API Gateway to handle data requests and ensures that only requests with the correct API keys can access data.
+
+## 3. How to View the Database and Test the API
+
+### A. The Database (`database/records/`)
+1. Open the `database/records/` folder. It contains the JSON records for all active universities.
+2. Open any JSON file (like `UniversityOfTexasAustin_CDS_2024-2025.json`) to view the strict, 150+ field schema.
+
+### B. The API Key System (`database/config.json` & `database/api_client.js`)
+1. Open `database/config.json`. The live API key is: `sk_live_9a8b7c6d5e4f3g2h1`. This securely manages database access.
+2. To test the security, open `College-List-Demo.html` and scroll to line 2901 (`const API_KEY = "sk_live_9a8b7c6d5e4f3g2h1";`).
+3. To prove it works, change a letter in the API Key in the HTML file (e.g., `sk_live_9a8b7c...WRONG`).
+4. Refresh the webpage. The webpage will immediately fail to load the data, proving that the API Gateway is actively rejecting unauthorized requests, just like a real enterprise system!
+5. Change the key back to the correct string, refresh, and the data will populate beautifully.

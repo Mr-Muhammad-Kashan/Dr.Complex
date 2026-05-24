@@ -1,0 +1,38 @@
+{
+  "name": "college-cds-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Scorecard-inspired REST API serving Common Data Set (CDS) data for US colleges.",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node --no-warnings=ExperimentalWarning src/server.js",
+    "dev": "node --no-warnings=ExperimentalWarning --watch src/server.js",
+    "ingest": "node --no-warnings=ExperimentalWarning src/ingest.js",
+    "admin": "bash scripts/admin.sh",
+    "test": "vitest run",
+    "test:unit": "vitest run test/unit",
+    "test:integration": "vitest run test/integration",
+    "test:watch": "vitest",
+    "docker:start": "bash scripts/start.sh",
+    "docker:stop": "bash scripts/stop.sh",
+    "docker:restart": "bash scripts/restart.sh",
+    "docker:logs": "bash scripts/logs.sh",
+    "docker:status": "bash scripts/status.sh",
+    "docker:reset": "bash scripts/reset.sh"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "swagger-ui-express": "^5.0.1",
+    "yaml": "^2.5.1"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0",
+    "vitest": "^2.1.1"
+  }
+}

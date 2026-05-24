@@ -1,0 +1,29 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILD_ID: ${BUILD_ID:-unknown}
+    image: college-cds-api:latest
+    container_name: college-cds-api
+    ports:
+      - "${PORT:-8080}:8080"
+    environment:
+      API_KEY: ${API_KEY:-dev-key-change-me}
+      CORS_ORIGIN: ${CORS_ORIGIN:-*}
+      DOCS_ENABLED: ${DOCS_ENABLED:-true}
+      DB_PATH: /data/cds.db
+      INGEST_DIR: /app/seed
+    volumes:
+      - cds_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/v1/health"]
+      interval: 15s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  cds_data:

@@ -1,0 +1,812 @@
+[
+  {
+    "#":1,
+    "Section":"CDS_META",
+    "Field":"school_name",
+    "Data Type":"string",
+    "Description":"Official institution name as reported in CDS Section A1.",
+    "Priority":"Must-have",
+    "CDS Source":"A1",
+    "Why (Design Rationale)":"Display, search, tab header"
+  },
+  {
+    "#":2,
+    "Section":"CDS_META",
+    "Field":"ipeds_id",
+    "Data Type":"string",
+    "Description":"6-digit NCES IPEDS unique identifier for the institution; joins to external datasets.",
+    "Priority":"Must-have",
+    "CDS Source":"A0 (external \u2014 NCES IPEDS)",
+    "Why (Design Rationale)":"Canonical key \u2014 links to Common App, College Board, Net Price Calculator"
+  },
+  {
+    "#":3,
+    "Section":"CDS_META",
+    "Field":"cds_year",
+    "Data Type":"string",
+    "Description":"Academic year covered by this CDS (e.g. '2024-2025'); format YYYY-YYYY.",
+    "Priority":"Must-have",
+    "CDS Source":"Cover page",
+    "Why (Design Rationale)":"Data currency warning when record is stale"
+  },
+  {
+    "#":4,
+    "Section":"CDS_META",
+    "Field":"confidence",
+    "Data Type":"enum",
+    "Description":"Parser self-assessment of extraction quality: 'high' | 'medium' | 'low'.",
+    "Priority":"Must-have",
+    "CDS Source":"Parser-generated",
+    "Why (Design Rationale)":"Data quality badge shown to counselors"
+  },
+  {
+    "#":5,
+    "Section":"CDS_META",
+    "Field":"source_filename",
+    "Data Type":"string",
+    "Description":"Original PDF filename, retained for audit trail and re-parsing.",
+    "Priority":"Must-have",
+    "CDS Source":"Parser-generated",
+    "Why (Design Rationale)":"Internal parser audit \u2014 trace any value back to source PDF"
+  },
+  {
+    "#":6,
+    "Section":"CDS_META",
+    "Field":"mailing_address",
+    "Data Type":"string",
+    "Description":"Street address of the institution from CDS A1.",
+    "Priority":"Must-have",
+    "CDS Source":"A1",
+    "Why (Design Rationale)":"Display field on school card \u2014 street address from CDS A1"
+  },
+  {
+    "#":7,
+    "Section":"CDS_META",
+    "Field":"city",
+    "Data Type":"string",
+    "Description":"City parsed from A1 'City\/State\/Zip\/Country' line.",
+    "Priority":"Must-have",
+    "CDS Source":"A1",
+    "Why (Design Rationale)":"Display + filter \u2014 'colleges in Boston', map pins, regional grouping"
+  },
+  {
+    "#":8,
+    "Section":"CDS_META",
+    "Field":"state",
+    "Data Type":"string",
+    "Description":"2-letter US state code (e.g. 'MA') parsed from A1.",
+    "Priority":"Must-have",
+    "CDS Source":"A1",
+    "Why (Design Rationale)":"Display + filter \u2014 'colleges in MA', in-state tuition logic for residents"
+  },
+  {
+    "#":9,
+    "Section":"CDS_META",
+    "Field":"zip",
+    "Data Type":"string",
+    "Description":"5-digit or ZIP+4 postal code; kept as string to preserve leading zeros.",
+    "Priority":"Nice to have",
+    "CDS Source":"A1",
+    "Why (Design Rationale)":"Geocoding fallback, commute-distance calculations for student fit"
+  },
+  {
+    "#":10,
+    "Section":"CDS_META",
+    "Field":"country",
+    "Data Type":"string",
+    "Description":"Country name; defaults to 'United States' since CDS is US-only.",
+    "Priority":"Nice to have",
+    "CDS Source":"A1",
+    "Why (Design Rationale)":"Future-proofing \u2014 CDS is US-only today, but supports international expansion"
+  },
+  {
+    "#":11,
+    "Section":"CDS_META",
+    "Field":"website",
+    "Data Type":"string",
+    "Description":"School home page URL from A1 'WWW Home Page Address'.",
+    "Priority":"Must-have",
+    "CDS Source":"A1",
+    "Why (Design Rationale)":"School card link-out \u2014 CDS A1 'WWW Home Page Address'. Counselors and students click through to verify info at the source."
+  },
+  {
+    "#":12,
+    "Section":"CDS_META",
+    "Field":"missing_sections",
+    "Data Type":"string[]",
+    "Description":"CDS section labels (e.g. 'C9', 'H2') the parser could not locate in the source PDF.",
+    "Priority":"Nice to have",
+    "CDS Source":"Parser-generated",
+    "Why (Design Rationale)":"Counselor tooltip: 'GPA data not reported by this school'"
+  },
+  {
+    "#":13,
+    "Section":"CLASS_SIZE",
+    "Field":"applicants_total",
+    "Data Type":"integer",
+    "Description":"Total number of first-time, first-year applicants for Fall enrollment (C1).",
+    "Priority":"Must-have",
+    "CDS Source":"C1",
+    "Why (Design Rationale)":"Funnel chart top bar"
+  },
+  {
+    "#":14,
+    "Section":"CLASS_SIZE",
+    "Field":"admitted_total",
+    "Data Type":"integer",
+    "Description":"Total number of first-time, first-year applicants admitted (C1).",
+    "Priority":"Must-have",
+    "CDS Source":"C1",
+    "Why (Design Rationale)":"Funnel chart; acceptance rate source"
+  },
+  {
+    "#":15,
+    "Section":"CLASS_SIZE",
+    "Field":"enrolled_total",
+    "Data Type":"integer",
+    "Description":"Total number of admitted first-time, first-year students who enrolled (C1).",
+    "Priority":"Must-have",
+    "CDS Source":"C1",
+    "Why (Design Rationale)":"Funnel chart; yield rate source"
+  },
+  {
+    "#":16,
+    "Section":"CLASS_SIZE",
+    "Field":"acceptance_rate",
+    "Data Type":"number",
+    "Description":"Derived: admitted_total \/ applicants_total; decimal between 0 and 1.",
+    "Priority":"Must-have",
+    "CDS Source":"Derived (C1: admitted \/ applicants)",
+    "Why (Design Rationale)":"Fit scoring, reach\/match\/safety label, school card"
+  },
+  {
+    "#":17,
+    "Section":"CLASS_SIZE",
+    "Field":"yield_rate",
+    "Data Type":"number",
+    "Description":"Derived: enrolled_total \/ admitted_total; decimal between 0 and 1.",
+    "Priority":"Must-have",
+    "CDS Source":"Derived (C1: enrolled \/ admitted)",
+    "Why (Design Rationale)":"'Dream vs reality' signal; how badly students want this school"
+  },
+  {
+    "#":18,
+    "Section":"EARLY_PROGRAMS",
+    "Field":"early_decision.offered",
+    "Data Type":"boolean",
+    "Description":"Whether the school offers a binding Early Decision plan (C21).",
+    "Priority":"Must-have",
+    "CDS Source":"C21",
+    "Why (Design Rationale)":"Strategy engine \u2014 ED available?"
+  },
+  {
+    "#":19,
+    "Section":"EARLY_PROGRAMS",
+    "Field":"early_action.offered",
+    "Data Type":"boolean",
+    "Description":"Whether the school offers a non-binding Early Action plan (C22).",
+    "Priority":"Must-have",
+    "CDS Source":"C22",
+    "Why (Design Rationale)":"Strategy engine \u2014 EA available?"
+  },
+  {
+    "#":20,
+    "Section":"EARLY_PROGRAMS",
+    "Field":"early_action.restrictive",
+    "Data Type":"boolean",
+    "Description":"Whether the Early Action plan is restrictive (SCEA\/REA), limiting other early applications.",
+    "Priority":"Must-have",
+    "CDS Source":"C22",
+    "Why (Design Rationale)":"SCEA\/REA warning in strategy tab"
+  },
+  {
+    "#":21,
+    "Section":"EARLY_PROGRAMS",
+    "Field":"early_action.deadline",
+    "Data Type":"string",
+    "Description":"Early Action application deadline as month\/day (e.g. '11\/1').",
+    "Priority":"Must-have",
+    "CDS Source":"C22",
+    "Why (Design Rationale)":"Application timeline feature"
+  },
+  {
+    "#":22,
+    "Section":"EARLY_PROGRAMS",
+    "Field":"early_action.notification_date",
+    "Data Type":"string",
+    "Description":"Date students are notified of EA decision as month\/day (e.g. '12\/16').",
+    "Priority":"Nice to have",
+    "CDS Source":"C22",
+    "Why (Design Rationale)":"Timeline display \u2014 useful but not blocking"
+  },
+  {
+    "#":23,
+    "Section":"FACTORS (all 18)",
+    "Field":"rigor_of_secondary_record",
+    "Data Type":"enum",
+    "Description":"Importance of high-school course rigor in admission decisions: very_important | important | considered | not_considered.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Core of AI fit analysis and 'How to Increase My Chance' tabs"
+  },
+  {
+    "#":24,
+    "Section":"FACTORS (all 18)",
+    "Field":"academic_gpa",
+    "Data Type":"enum",
+    "Description":"Importance of academic GPA in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Core of AI fit analysis and 'How to Increase My Chance' tabs"
+  },
+  {
+    "#":25,
+    "Section":"FACTORS (all 18)",
+    "Field":"application_essay",
+    "Data Type":"enum",
+    "Description":"Importance of the application essay in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Core of AI fit analysis and 'How to Increase My Chance' tabs"
+  },
+  {
+    "#":26,
+    "Section":"FACTORS (all 18)",
+    "Field":"recommendation",
+    "Data Type":"enum",
+    "Description":"Importance of letters of recommendation in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Core of AI fit analysis and 'How to Increase My Chance' tabs"
+  },
+  {
+    "#":27,
+    "Section":"FACTORS (all 18)",
+    "Field":"extracurricular_activities",
+    "Data Type":"enum",
+    "Description":"Importance of extracurricular activities in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Core of AI fit analysis and 'How to Increase My Chance' tabs"
+  },
+  {
+    "#":28,
+    "Section":"FACTORS (all 18)",
+    "Field":"character_personal_qualities",
+    "Data Type":"enum",
+    "Description":"Importance of character and personal qualities in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Core of AI fit analysis and 'How to Increase My Chance' tabs"
+  },
+  {
+    "#":29,
+    "Section":"FACTORS (all 18)",
+    "Field":"talent_ability",
+    "Data Type":"enum",
+    "Description":"Importance of specific talents or abilities (arts, athletics, etc.) in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Core of AI fit analysis and 'How to Increase My Chance' tabs"
+  },
+  {
+    "#":30,
+    "Section":"FACTORS (all 18)",
+    "Field":"interview",
+    "Data Type":"enum",
+    "Description":"Importance of the interview in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Core of AI fit analysis and 'How to Increase My Chance' tabs"
+  },
+  {
+    "#":31,
+    "Section":"FACTORS (all 18)",
+    "Field":"first_generation",
+    "Data Type":"enum",
+    "Description":"Importance of first-generation college status in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Contextual fit signal \u2014 critical for public school OOS students"
+  },
+  {
+    "#":32,
+    "Section":"FACTORS (all 18)",
+    "Field":"state_residency",
+    "Data Type":"enum",
+    "Description":"Importance of state residency in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Contextual fit signal \u2014 critical for public school OOS students"
+  },
+  {
+    "#":33,
+    "Section":"FACTORS (all 18)",
+    "Field":"geographical_residence",
+    "Data Type":"enum",
+    "Description":"Importance of geographical residence (region\/state\/country) in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Contextual fit signal \u2014 critical for public school OOS students"
+  },
+  {
+    "#":34,
+    "Section":"FACTORS (all 18)",
+    "Field":"alumni_relation",
+    "Data Type":"enum",
+    "Description":"Importance of alumni relationship (legacy) in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Contextual fit signal \u2014 critical for public school OOS students"
+  },
+  {
+    "#":35,
+    "Section":"FACTORS (all 18)",
+    "Field":"standardized_test_scores",
+    "Data Type":"enum",
+    "Description":"Importance of SAT\/ACT or other standardized test scores in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Core C7 factor \u2014 affects strategy advice"
+  },
+  {
+    "#":36,
+    "Section":"FACTORS (all 18)",
+    "Field":"class_rank",
+    "Data Type":"enum",
+    "Description":"Importance of high-school class rank in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Not Considered at Harvard \u2014 still a signal to students"
+  },
+  {
+    "#":37,
+    "Section":"FACTORS (all 18)",
+    "Field":"religious_affiliation",
+    "Data Type":"enum",
+    "Description":"Importance of religious affiliation\/commitment in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Not Considered at Harvard \u2014 still a signal to students"
+  },
+  {
+    "#":38,
+    "Section":"FACTORS (all 18)",
+    "Field":"level_of_applicant_interest",
+    "Data Type":"enum",
+    "Description":"Importance of demonstrated interest (visits, contacts) in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Not Considered at Harvard \u2014 still a signal to students"
+  },
+  {
+    "#":39,
+    "Section":"FACTORS (all 18)",
+    "Field":"work_experience",
+    "Data Type":"enum",
+    "Description":"Importance of paid work experience in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Considered at Harvard \u2014 part of holistic review"
+  },
+  {
+    "#":40,
+    "Section":"FACTORS (all 18)",
+    "Field":"volunteer_work",
+    "Data Type":"enum",
+    "Description":"Importance of volunteer work in admission decisions.",
+    "Priority":"Must-have",
+    "CDS Source":"C7",
+    "Why (Design Rationale)":"Not Used at Harvard \u2014 absence is itself a signal; keep all 18"
+  },
+  {
+    "#":41,
+    "Section":"TEST_SCORES",
+    "Field":"test_policy",
+    "Data Type":"enum",
+    "Description":"SAT\/ACT policy: required | recommended | considered_not_required | test_blind | neither_required_nor_recommended.",
+    "Priority":"Must-have",
+    "CDS Source":"C8",
+    "Why (Design Rationale)":"Profile display; gates strategy advice (required vs optional)"
+  },
+  {
+    "#":42,
+    "Section":"TEST_SCORES",
+    "Field":"sat_composite_25th",
+    "Data Type":"integer",
+    "Description":"25th percentile of enrolled-student SAT composite (derived from ERW + Math); range 400\u20131600.",
+    "Priority":"Must-have",
+    "CDS Source":"Derived (C9: ERW + Math)",
+    "Why (Design Rationale)":"Score range bar; fit scoring vs student SAT"
+  },
+  {
+    "#":43,
+    "Section":"TEST_SCORES",
+    "Field":"sat_composite_75th",
+    "Data Type":"integer",
+    "Description":"75th percentile of enrolled-student SAT composite (derived from ERW + Math); range 400\u20131600.",
+    "Priority":"Must-have",
+    "CDS Source":"Derived (C9: ERW + Math)",
+    "Why (Design Rationale)":"Score range bar; fit scoring vs student SAT"
+  },
+  {
+    "#":44,
+    "Section":"TEST_SCORES",
+    "Field":"act_composite_25th",
+    "Data Type":"integer",
+    "Description":"25th percentile of enrolled-student ACT composite; range 1\u201336.",
+    "Priority":"Must-have",
+    "CDS Source":"C9",
+    "Why (Design Rationale)":"Score range bar; fit scoring vs student ACT"
+  },
+  {
+    "#":45,
+    "Section":"TEST_SCORES",
+    "Field":"act_composite_75th",
+    "Data Type":"integer",
+    "Description":"75th percentile of enrolled-student ACT composite; range 1\u201336.",
+    "Priority":"Must-have",
+    "CDS Source":"C9",
+    "Why (Design Rationale)":"Score range bar; fit scoring vs student ACT"
+  },
+  {
+    "#":46,
+    "Section":"TEST_SCORES",
+    "Field":"sat_erw_25th",
+    "Data Type":"integer",
+    "Description":"25th percentile SAT Evidence-Based Reading & Writing sub-score; range 200\u2013800.",
+    "Priority":"Nice to have",
+    "CDS Source":"C9",
+    "Why (Design Rationale)":"Sub-score detail \u2014 useful for score improvement advice"
+  },
+  {
+    "#":47,
+    "Section":"TEST_SCORES",
+    "Field":"sat_erw_75th",
+    "Data Type":"integer",
+    "Description":"75th percentile SAT Evidence-Based Reading & Writing sub-score; range 200\u2013800.",
+    "Priority":"Nice to have",
+    "CDS Source":"C9",
+    "Why (Design Rationale)":"Sub-score detail \u2014 useful for score improvement advice"
+  },
+  {
+    "#":48,
+    "Section":"TEST_SCORES",
+    "Field":"sat_math_25th",
+    "Data Type":"integer",
+    "Description":"25th percentile SAT Math sub-score; range 200\u2013800.",
+    "Priority":"Nice to have",
+    "CDS Source":"C9",
+    "Why (Design Rationale)":"Sub-score detail \u2014 useful for score improvement advice"
+  },
+  {
+    "#":49,
+    "Section":"TEST_SCORES",
+    "Field":"sat_math_75th",
+    "Data Type":"integer",
+    "Description":"75th percentile SAT Math sub-score; range 200\u2013800.",
+    "Priority":"Nice to have",
+    "CDS Source":"C9",
+    "Why (Design Rationale)":"Sub-score detail \u2014 useful for score improvement advice"
+  },
+  {
+    "#":50,
+    "Section":"TEST_SCORES",
+    "Field":"pct_submitting_sat",
+    "Data Type":"number",
+    "Description":"Percentage of enrolled freshmen who submitted SAT scores (0\u2013100).",
+    "Priority":"Nice to have",
+    "CDS Source":"C9",
+    "Why (Design Rationale)":"Context for test-optional strategy; not used in fit score"
+  },
+  {
+    "#":51,
+    "Section":"TEST_SCORES",
+    "Field":"pct_submitting_act",
+    "Data Type":"number",
+    "Description":"Percentage of enrolled freshmen who submitted ACT scores (0\u2013100).",
+    "Priority":"Nice to have",
+    "CDS Source":"C9",
+    "Why (Design Rationale)":"Context for test-optional strategy; not used in fit score"
+  },
+  {
+    "#":52,
+    "Section":"GPA_DISTRIBUTION",
+    "Field":"avg_gpa",
+    "Data Type":"number",
+    "Description":"Average high-school GPA of enrolled freshmen (typically on a 4.0 scale; may exceed if weighted).",
+    "Priority":"Must-have",
+    "CDS Source":"C12",
+    "Why (Design Rationale)":"Shown on profile card; first GPA signal students check"
+  },
+  {
+    "#":53,
+    "Section":"GPA_DISTRIBUTION",
+    "Field":"gpa_weighted",
+    "Data Type":"boolean",
+    "Description":"True if avg_gpa is reported on a weighted scale (allows values >4.0); false if unweighted.",
+    "Priority":"Nice to have",
+    "CDS Source":"C11 (inferred from band distribution)",
+    "Why (Design Rationale)":"Context note: 'GPA scale is weighted' disclaimer on display"
+  },
+  {
+    "#":54,
+    "Section":"GPA_DISTRIBUTION",
+    "Field":"gpa_4_0_and_above",
+    "Data Type":"number",
+    "Description":"Percentage of enrolled freshmen with GPA of 4.0 or above (0\u2013100).",
+    "Priority":"Must-have",
+    "CDS Source":"C11",
+    "Why (Design Rationale)":"Fit scoring \u2014 where does student GPA land in admitted class"
+  },
+  {
+    "#":55,
+    "Section":"GPA_DISTRIBUTION",
+    "Field":"gpa_3_75_to_3_99",
+    "Data Type":"number",
+    "Description":"Percentage of enrolled freshmen with GPA between 3.75 and 3.99 (0\u2013100).",
+    "Priority":"Must-have",
+    "CDS Source":"C11",
+    "Why (Design Rationale)":"Fit scoring band"
+  },
+  {
+    "#":56,
+    "Section":"GPA_DISTRIBUTION",
+    "Field":"gpa_3_50_to_3_74",
+    "Data Type":"number",
+    "Description":"Percentage of enrolled freshmen with GPA between 3.50 and 3.74 (0\u2013100).",
+    "Priority":"Must-have",
+    "CDS Source":"C11",
+    "Why (Design Rationale)":"Fit scoring band"
+  },
+  {
+    "#":57,
+    "Section":"GPA_DISTRIBUTION",
+    "Field":"gpa_3_25_to_3_49",
+    "Data Type":"number",
+    "Description":"Percentage of enrolled freshmen with GPA between 3.25 and 3.49 (0\u2013100).",
+    "Priority":"Nice to have",
+    "CDS Source":"C11",
+    "Why (Design Rationale)":"Useful for mid-tier schools; negligible at Harvard (0.6%)"
+  },
+  {
+    "#":58,
+    "Section":"GPA_DISTRIBUTION",
+    "Field":"gpa_3_0_to_3_24",
+    "Data Type":"number",
+    "Description":"Percentage of enrolled freshmen with GPA between 3.00 and 3.24 (0\u2013100).",
+    "Priority":"Nice to have",
+    "CDS Source":"C11",
+    "Why (Design Rationale)":"Useful for mid-tier schools; negligible at Harvard (0.17%)"
+  },
+  {
+    "#":59,
+    "Section":"CDS_ACADEMICS",
+    "Field":"student_faculty_ratio",
+    "Data Type":"integer",
+    "Description":"Student-to-faculty ratio expressed as an integer (e.g. 7 means 7 students per faculty member).",
+    "Priority":"Must-have",
+    "CDS Source":"I2",
+    "Why (Design Rationale)":"Profile card, preference matching filter"
+  },
+  {
+    "#":60,
+    "Section":"CDS_ACADEMICS",
+    "Field":"institution_type",
+    "Data Type":"enum",
+    "Description":"Source of institutional control: public | private_nonprofit | private_for_profit.",
+    "Priority":"Must-have",
+    "CDS Source":"A2",
+    "Why (Design Rationale)":"Gates COA display logic (public vs private)"
+  },
+  {
+    "#":61,
+    "Section":"CDS_ACADEMICS",
+    "Field":"setting",
+    "Data Type":"enum",
+    "Description":"Campus setting: urban | suburban | town | rural. Sourced from IPEDS (not native to the CDS).",
+    "Priority":"Nice to have",
+    "CDS Source":"External (IPEDS \u2014 not in CDS)",
+    "Why (Design Rationale)":"Preference filter (urban\/suburban\/rural)"
+  },
+  {
+    "#":62,
+    "Section":"CDS_ACADEMICS",
+    "Field":"undergrad_enrollment",
+    "Data Type":"integer",
+    "Description":"Total undergraduate enrollment (full-time + part-time, degree-seeking + non-degree).",
+    "Priority":"Must-have",
+    "CDS Source":"B1",
+    "Why (Design Rationale)":"Size preference filter (small\/medium\/large)"
+  },
+  {
+    "#":63,
+    "Section":"CDS_ACADEMICS",
+    "Field":"pct_freshmen_on_campus",
+    "Data Type":"number",
+    "Description":"Percentage of first-time, first-year students living in college-owned\/operated housing (0\u2013100).",
+    "Priority":"Nice to have",
+    "CDS Source":"F1",
+    "Why (Design Rationale)":"Campus life preference; shown on profile"
+  },
+  {
+    "#":64,
+    "Section":"EXPENSES",
+    "Field":"tuition_outofstate",
+    "Data Type":"integer",
+    "Description":"Annual full-time tuition for out-of-state (or all students, for private schools), in USD.",
+    "Priority":"Must-have",
+    "CDS Source":"G1",
+    "Why (Design Rationale)":"Primary cost signal; COA card; affordability filter"
+  },
+  {
+    "#":65,
+    "Section":"EXPENSES",
+    "Field":"tuition_instate",
+    "Data Type":"integer",
+    "Description":"Annual full-time in-state tuition for public institutions, in USD; null for private schools.",
+    "Priority":"Must-have",
+    "CDS Source":"G1",
+    "Why (Design Rationale)":"Null for private \u2014 critical for public school records"
+  },
+  {
+    "#":66,
+    "Section":"EXPENSES",
+    "Field":"room_and_board",
+    "Data Type":"integer",
+    "Description":"Annual on-campus food and housing cost (double occupancy, 19 meals\/week), in USD.",
+    "Priority":"Must-have",
+    "CDS Source":"G1",
+    "Why (Design Rationale)":"COA breakdown bar; housing cost filter"
+  },
+  {
+    "#":67,
+    "Section":"EXPENSES",
+    "Field":"total_coa_outofstate",
+    "Data Type":"integer",
+    "Description":"Total cost of attendance for out-of-state students; derived = tuition + fees + room\/board + books.",
+    "Priority":"Must-have",
+    "CDS Source":"Derived (G1 + G5)",
+    "Why (Design Rationale)":"Top-line affordability number; true cost calculator"
+  },
+  {
+    "#":68,
+    "Section":"EXPENSES",
+    "Field":"total_coa_instate",
+    "Data Type":"integer",
+    "Description":"Total cost of attendance for in-state students at public schools; null for private.",
+    "Priority":"Must-have",
+    "CDS Source":"Derived (G1 + G5)",
+    "Why (Design Rationale)":"Null for private \u2014 critical for public in-state students"
+  },
+  {
+    "#":69,
+    "Section":"EXPENSES",
+    "Field":"required_fees",
+    "Data Type":"integer",
+    "Description":"Annual required fees not included in tuition (registration, health, activity), in USD.",
+    "Priority":"Must-have",
+    "CDS Source":"G1",
+    "Why (Design Rationale)":"COA breakdown bar \u2014 needed to render full cost breakdown chart"
+  },
+  {
+    "#":70,
+    "Section":"EXPENSES",
+    "Field":"books_supplies",
+    "Data Type":"integer",
+    "Description":"Estimated annual cost of books and supplies, in USD.",
+    "Priority":"Must-have",
+    "CDS Source":"G5",
+    "Why (Design Rationale)":"COA breakdown bar \u2014 required to render all 5 cost bars and verify total"
+  },
+  {
+    "#":71,
+    "Section":"EXPENSES",
+    "Field":"transportation",
+    "Data Type":"string",
+    "Description":"Estimated annual transportation cost; often reported as string ('varies') or integer USD.",
+    "Priority":"Must-have",
+    "CDS Source":"G5",
+    "Why (Design Rationale)":"COA breakdown bar \u2014 required to render all 5 cost bars and verify total"
+  },
+  {
+    "#":72,
+    "Section":"EXPENSES",
+    "Field":"other_expenses",
+    "Data Type":"integer",
+    "Description":"Estimated annual other personal expenses (clothing, laundry, entertainment), in USD.",
+    "Priority":"Must-have",
+    "CDS Source":"G5",
+    "Why (Design Rationale)":"COA breakdown bar \u2014 required to render all 5 cost bars and verify total"
+  },
+  {
+    "#":73,
+    "Section":"FINANCIAL_AID",
+    "Field":"pct_need_fully_met",
+    "Data Type":"number",
+    "Description":"Percentage of aided students whose financial need was fully met by the school (0\u2013100).",
+    "Priority":"Must-have",
+    "CDS Source":"H2 (derived: H \/ D)",
+    "Why (Design Rationale)":"'Will my need be covered?' \u2014 single most important aid question"
+  },
+  {
+    "#":74,
+    "Section":"FINANCIAL_AID",
+    "Field":"avg_need_based_aid_package",
+    "Data Type":"integer",
+    "Description":"Average total need-based aid package for first-time freshmen, in USD.",
+    "Priority":"Must-have",
+    "CDS Source":"H2 row J",
+    "Why (Design Rationale)":"True cost calculator; aid comparison across schools"
+  },
+  {
+    "#":75,
+    "Section":"FINANCIAL_AID",
+    "Field":"avg_need_based_scholarship",
+    "Data Type":"integer",
+    "Description":"Average need-based scholarship\/grant award for first-time freshmen, in USD.",
+    "Priority":"Must-have",
+    "CDS Source":"H2 row K",
+    "Why (Design Rationale)":"Grant vs loan split \u2014 students need to know gift vs debt"
+  },
+  {
+    "#":76,
+    "Section":"FINANCIAL_AID",
+    "Field":"avg_need_based_loan",
+    "Data Type":"integer",
+    "Description":"Average need-based loan award for first-time freshmen, in USD.",
+    "Priority":"Nice to have",
+    "CDS Source":"H2 row M",
+    "Why (Design Rationale)":"Debt projection \u2014 useful but secondary to grant figure"
+  },
+  {
+    "#":77,
+    "Section":"FINANCIAL_AID",
+    "Field":"pct_freshmen_with_need",
+    "Data Type":"number",
+    "Description":"Percentage of freshmen determined to have financial need (0\u2013100).",
+    "Priority":"Nice to have",
+    "CDS Source":"H2 (derived: C \/ A)",
+    "Why (Design Rationale)":"'Do I qualify?' context \u2014 not blocking any core feature"
+  },
+  {
+    "#":78,
+    "Section":"FINANCIAL_AID",
+    "Field":"aid_policy_note",
+    "Data Type":"string",
+    "Description":"Free-text description of major affordability initiatives (e.g. income-cutoff free tuition); CDS H15.",
+    "Priority":"Must-have",
+    "CDS Source":"H15",
+    "Why (Design Rationale)":"School-specific aid initiative \u2014 critical differentiator for students"
+  },
+  {
+    "#":79,
+    "Section":"CDS_OUTCOMES",
+    "Field":"retention_rate_fulltime",
+    "Data Type":"number",
+    "Description":"Percentage of full-time first-year students retained to the second year (0\u2013100).",
+    "Priority":"Must-have",
+    "CDS Source":"B22",
+    "Why (Design Rationale)":"Quality proxy; shown on outcomes tab; used in school comparison"
+  },
+  {
+    "#":80,
+    "Section":"CDS_OUTCOMES",
+    "Field":"grad_rate_6yr",
+    "Data Type":"number",
+    "Description":"Six-year graduation rate as decimal 0\u20131 (e.g. 0.95 = 95%).",
+    "Priority":"Must-have",
+    "CDS Source":"Derived (B4-B11: G \/ C)",
+    "Why (Design Rationale)":"Primary outcomes metric; school comparison filter"
+  },
+  {
+    "#":81,
+    "Section":"CDS_OUTCOMES",
+    "Field":"grad_rate_4yr",
+    "Data Type":"number",
+    "Description":"Four-year graduation rate as decimal 0\u20131 (e.g. 0.85 = 85%).",
+    "Priority":"Nice to have",
+    "CDS Source":"Derived (B4-B11: D \/ C)",
+    "Why (Design Rationale)":"Progression chart \u2014 useful context, not essential alone"
+  }
+]

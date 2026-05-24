@@ -1,0 +1,176 @@
+openapi: 3.0.3
+info:
+  title: College CDS API
+  version: 1.0.0
+  description: |
+    A Scorecard-inspired REST API serving Common Data Set (CDS) data for US colleges.
+    All responses use a `{metadata, results[]}` envelope. Authentication uses a
+    single shared API key passed as the `api_key` query parameter (or `x-api-key` header).
+servers:
+  - url: http://localhost:8080
+    description: Local development
+  - url: https://api.dreamcollege.ai
+    description: Production (placeholder)
+security:
+  - apiKeyQuery: []
+  - apiKeyHeader: []
+paths:
+  /v1/schools:
+    get:
+      summary: Search schools
+      description: |
+        Returns a paginated list of schools. By default returns the latest CDS year
+        per school. Use `fields` to return projected CDS payloads instead of the
+        default lean result shape.
+      parameters:
+        - in: query
+          name: school.name
+          schema: { type: string }
+          description: Case-insensitive substring match on school name
+          example: harvard
+        - in: query
+          name: school.state
+          schema: { type: string, minLength: 2, maxLength: 2 }
+          description: 2-letter US state code (exact match)
+          example: MA
+        - in: query
+          name: year
+          schema: { type: string }
+          description: Filter to a specific CDS year (YYYY-YYYY); otherwise returns latest per school
+          example: 2024-2025
+        - in: query
+          name: page
+          schema: { type: integer, minimum: 0, default: 0 }
+        - in: query
+          name: per_page
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+        - in: query
+          name: fields
+          schema: { type: string }
+          description: |
+            Comma-separated dot-paths into the CDS payload to project, e.g.
+            `cds_meta.school_name,cds_admissions.test_scores`.
+            When omitted, results use a lean shape (id/name/state/city/year).
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SearchEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+  /v1/schools/{ipeds_id}:
+    get:
+      summary: Get a school by IPEDS ID
+      parameters:
+        - in: path
+          name: ipeds_id
+          required: true
+          schema: { type: string, pattern: '^[0-9]{6}$' }
+          description: 6-digit NCES IPEDS ID
+          example: '166027'
+        - in: query
+          name: year
+          schema: { type: string }
+          description: Specific CDS year (YYYY-YYYY); defaults to latest available
+        - in: query
+          name: fields
+          schema: { type: string }
+          description: Comma-separated dot-paths to project from the CDS payload
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LookupEnvelope' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /v1/health:
+    get:
+      summary: Health check
+      security: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: ok }
+                  schools_loaded: { type: integer, example: 10 }
+                  db_path: { type: string, nullable: true }
+                  uptime_seconds: { type: integer }
+components:
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-api-key
+  schemas:
+    Metadata:
+      type: object
+      properties:
+        total:    { type: integer, example: 1 }
+        page:     { type: integer, example: 0 }
+        per_page: { type: integer, example: 20 }
+    LeanResult:
+      type: object
+      properties:
+        ipeds_id: { type: string, example: '166027' }
+        name:     { type: string, example: 'Harvard University' }
+        state:    { type: string, example: 'MA' }
+        city:     { type: string, example: 'Cambridge' }
+        cds_year: { type: string, example: '2024-2025' }
+    CdsPayload:
+      type: object
+      description: |
+        Full CDS payload — see DreamCollege_CDS_Template V1.0.json for the schema.
+        Top-level keys: cds_meta, cds_admissions, cds_academics, cds_financials, cds_outcomes.
+    SearchEnvelope:
+      type: object
+      properties:
+        metadata: { $ref: '#/components/schemas/Metadata' }
+        results:
+          type: array
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/LeanResult'
+              - $ref: '#/components/schemas/CdsPayload'
+    LookupEnvelope:
+      type: object
+      properties:
+        metadata: { $ref: '#/components/schemas/Metadata' }
+        results:
+          type: array
+          maxItems: 1
+          items:
+            $ref: '#/components/schemas/CdsPayload'
+    ErrorBody:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:    { type: integer, example: 404 }
+            message: { type: string,  example: 'School 999999 not found' }
+  responses:
+    Unauthorized:
+      description: Missing or invalid api_key
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorBody' }
+    NotFound:
+      description: School not found
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorBody' }
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorBody' }

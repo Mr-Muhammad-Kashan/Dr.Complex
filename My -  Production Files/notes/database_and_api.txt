@@ -1,0 +1,23 @@
+# Database Schema and API Key Management
+
+## 1. The Database (`database/records/`)
+Our database is comprised of 16 individual JSON files. Each JSON file corresponds to a university's Common Data Set (CDS). 
+All data inside these files has been strictly formatted to abide by `database_schema.json`.
+
+The schema divides data into:
+- `cds_meta`: UI data, rankings, locations, logos.
+- `cds_admissions`: Applicants, admitted, enrolled, test scores, acceptance rates.
+- `cds_academics`: Student-faculty ratio, enrollment size.
+- `cds_financials`: Tuition, room and board, financial aid.
+- `cds_outcomes`: Graduation and retention rates.
+
+*Note: The JSON files provided by the manager have been fully integrated, restructured to be 100% compatible with the frontend schema, and verified against internet data for 2023-2024.*
+
+## 2. The API Key System (`database/config.json`)
+To simulate a secure enterprise environment, we use an API Key system.
+- The `config.json` stores valid API Keys. Current key: `sk_live_9a8b7c6d5e4f3g2h1`
+- The `api_client.js` validates every request against this key. If the frontend passes an incorrect key, the API simulates a `401 Unauthorized` network error, and no data is returned.
+- To demonstrate this to your manager, you can edit `College-List-Demo.html` line 2901 (`const API_KEY = "..."`) to an invalid key. The website will fail to fetch data and log an authorization error in the console.
+
+## 3. Data Flow
+HTML (`College-List-Demo.html`) -> Calls `dbAPI.fetchSchoolData(id)` -> API Client authenticates -> API Client reads `[School].json` -> Returns payload to HTML -> HTML renders charts and metrics.

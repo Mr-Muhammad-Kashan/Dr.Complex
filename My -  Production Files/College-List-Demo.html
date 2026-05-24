@@ -1,0 +1,3375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Recommendation - DreamCollege.ai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <style>
+        :root {
+            --primary-purple: #5B2BE0;
+            --primary-purple-hover: #4a22c4;
+            --sidebar-active-bg: linear-gradient(135deg, #5B2BE0 0%, #7C3AED 100%);
+            --text-dark: #1e293b;
+            --text-medium: #475569;
+            --text-muted: #64748b;
+            --text-light: #94a3b8;
+            --bg-body: #f0eefb;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --border-light: #f1f5f9;
+            --success-green: #22c55e;
+            --danger-red: #dc2626;
+            --orange: #fb923c;
+            --font-main: 'Inter', sans-serif;
+            --header-height: 72px;
+            /* Reference variables */
+            --purple: #6C4EF5;
+            --purple-dark: #5038D0;
+            --purple-pale: #EEF0FF;
+            --purple-soft: #F5F3FF;
+            --ink: #1A1235;
+            --i60: #5A5878;
+            --i30: #9896B0;
+            --i10: #F4F3F8;
+            --i05: #FAFAFA;
+            --white: #FFFFFF;
+            --rule: #E8E4F4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ----- UNIFIED TOP BAR ----- */
+        .global-header {
+            height: var(--header-height);
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            z-index: 1000;
+            flex-shrink: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .global-header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            text-decoration: none;
+            padding-right: 20px;
+        }
+
+        .logo img {
+            height: 36px;
+            width: auto;
+            display: block;
+        }
+
+        .collapse-btn {
+            color: var(--primary-purple);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            opacity: 0.7;
+        }
+
+        .collapse-btn:hover {
+            opacity: 1;
+        }
+
+        .global-header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .icon-btn:hover {
+            color: var(--primary-purple);
+            background: rgba(91, 43, 224, 0.06);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            margin-left: 4px;
+        }
+
+        .user-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e2e8f0;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+        }
+
+        .user-role {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        /* ----- MAIN CONTAINER (Sidebar + Content) ----- */
+        .main-container {
+            flex: 1;
+            display: flex;
+            width: 100%;
+            margin-top: var(--header-height);
+            height: calc(100vh - var(--header-height));
+            overflow: hidden;
+        }
+
+        /* ----- SIDEBAR ----- */
+        .sidebar {
+            width: 260px;
+            min-width: 260px;
+            background-color: #ffffff;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            z-index: 50;
+            height: 100%;
+            overflow-y: auto;
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            bottom: 0;
+        }
+
+        .nav-menu {
+            list-style: none;
+            flex: 1;
+            padding-bottom: 24px;
+            padding-top: 24px;
+        }
+
+        .nav-item {
+            margin-bottom: 2px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            gap: 12px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-purple);
+            background-color: rgba(91, 43, 224, 0.04);
+        }
+
+        .nav-link .nav-icon {
+            width: 20px;
+            height: 20px;
+            fill: #94a3b8;
+            flex-shrink: 0;
+        }
+
+        .nav-link.active-dropdown {
+            background: var(--sidebar-active-bg);
+            color: white;
+            border-radius: 8px;
+            margin: 0 12px;
+            padding: 12px 16px;
+        }
+
+        .nav-link.active-dropdown .nav-icon {
+            fill: #ffffff;
+        }
+
+        .nav-link .dropdown-arrow {
+            margin-left: auto;
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .nav-link.active-dropdown .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .sub-menu {
+            list-style: none;
+            padding: 8px 0;
+            display: block;
+        }
+
+        .sub-menu li {
+            padding: 0;
+        }
+
+        .sub-menu .sub-link {
+            display: flex;
+            align-items: center;
+            padding: 9px 20px 9px 52px;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .sub-menu .sub-link:hover {
+            color: var(--primary-purple);
+        }
+
+        .sub-menu .sub-link.active {
+            color: var(--primary-purple);
+            font-weight: 600;
+        }
+
+        .sub-menu .sub-link::before {
+            content: "\2022";
+            margin-right: 10px;
+            font-size: 1.4rem;
+            line-height: 1;
+            color: var(--text-light);
+        }
+
+        .sub-menu .sub-link.active::before {
+            color: var(--primary-purple);
+        }
+
+        .nav-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 12px 20px;
+        }
+
+        /* ----- MAIN CONTENT ----- */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-width: 0;
+            margin-left: 260px;
+        }
+
+        /* CONTENT AREA */
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 28px;
+            scroll-behavior: smooth;
+        }
+
+        /* Page Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .page-title h1 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .breadcrumbs {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .breadcrumbs a {
+            color: var(--primary-purple);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            margin: 0 6px;
+            color: var(--text-light);
+        }
+
+        .btn {
+            padding: 0 20px;
+            height: 44px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: var(--font-main);
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-purple);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-purple-hover);
+            box-shadow: 0 4px 12px rgba(91, 43, 224, 0.3);
+        }
+
+        .btn-dark {
+            background-color: #1e1e2e;
+            color: white;
+        }
+
+        .btn-dark:hover {
+            background-color: #2d2d40;
+        }
+
+        .star-icon {
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+
+        /* Customized Search Section Card */
+        .search-card {
+            background-color: #d4d3fa;
+            /* Updated solid color */
+            border-radius: 16px;
+            margin-bottom: 24px;
+            /* Added 3D effect with inner highlights/shadows and an outer drop shadow */
+            box-shadow:
+                0 12px 24px -8px rgba(91, 43, 224, 0.25),
+                0 4px 8px -4px rgba(91, 43, 224, 0.15),
+                inset 0 2px 4px rgba(255, 255, 255, 0.8),
+                inset 0 -3px 6px rgba(186, 173, 244, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .search-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2L14.47 8.35H21.17L15.91 12.87L18.38 19.22L12 15.35L5.62 19.22L8.09 12.87L2.83 8.35H9.53L12 2Z' fill='%23ffffff33'/%3E%3C/svg%3E");
+            background-size: 50px;
+            opacity: 0.3;
+            /* Slightly increased opacity to match the new background color */
+            pointer-events: none;
+            border-radius: 16px;
+        }
+
+        .search-card-left {
+            flex: 1;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            /* Ensure content sits above pseudo-element */
+            z-index: 1;
+        }
+
+        .search-card-right {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+            /* Ensure content sits above pseudo-element */
+            z-index: 1;
+        }
+
+        .search-subtitle {
+            font-size: 0.92rem;
+            color: #334155;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            flex-wrap: nowrap;
+            /* Prevent wrapping */
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 340px;
+            /* Fixed width */
+            flex: 0 0 auto;
+            /* Do not grow, keeps buttons tight to the left */
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            z-index: 9999;
+            /* Ensure tooltip sits above the input and everything else */
+        }
+
+        .info-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1.5px solid #94a3b8;
+            color: #94a3b8;
+            font-size: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: help;
+            font-style: normal;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.25s ease;
+        }
+
+        .info-icon:hover {
+            border-color: var(--primary-purple);
+            color: var(--primary-purple);
+            transform: scale(1.15);
+        }
+
+        .info-icon::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-6px);
+            background: linear-gradient(135deg, #5B2BE0 0%, #7C3AED 50%, #a855f7 100%);
+            color: #ffffff;
+            font-size: 11.5px;
+            font-weight: 500;
+            font-style: normal;
+            padding: 10px 16px;
+            border-radius: 10px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), visibility 0.3s;
+            z-index: 1000;
+            box-shadow: 0 8px 24px rgba(91, 43, 224, 0.35), 0 2px 8px rgba(0, 0, 0, 0.1);
+            letter-spacing: 0.01em;
+            line-height: 1.4;
+        }
+
+        /* Invisible bridge to prevent hover glitching */
+        .info-icon::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: -10px;
+            right: -10px;
+            height: 20px;
+            background: transparent;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .info-icon:hover::after,
+        .info-icon:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .info-icon:hover::after {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .input-group select,
+        .input-group input[type="text"] {
+            height: 44px;
+            padding: 0 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-family: var(--font-main);
+            outline: none;
+            transition: border-color 0.2s;
+            color: var(--text-dark);
+            background-color: #ffffff;
+            cursor: pointer;
+            appearance: auto;
+        }
+
+        .input-group select:focus,
+        .input-group input[type="text"]:focus {
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 3px rgba(91, 43, 224, 0.08);
+        }
+
+        .input-group input[type="text"] {
+            cursor: text;
+            appearance: none;
+        }
+
+        /* Major Search Autocomplete Dropdown */
+        .major-search-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .major-dropdown {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            max-height: 240px;
+            overflow-y: auto;
+            z-index: 500;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(91, 43, 224, 0.08);
+            display: none;
+            animation: dropdownFadeIn 0.2s ease;
+        }
+
+        @keyframes dropdownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .major-dropdown.visible {
+            display: block;
+        }
+
+        .major-dropdown-item {
+            padding: 10px 16px;
+            font-size: 0.87rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: var(--font-main);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .major-dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .major-dropdown-item:hover,
+        .major-dropdown-item.highlighted {
+            background: linear-gradient(135deg, rgba(91, 43, 224, 0.06) 0%, rgba(124, 58, 237, 0.04) 100%);
+            color: var(--primary-purple);
+            padding-left: 20px;
+        }
+
+        .major-dropdown-item .match-highlight {
+            font-weight: 700;
+            color: var(--primary-purple);
+        }
+
+        .major-dropdown-empty {
+            padding: 14px 16px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+            font-style: italic;
+        }
+
+        .search-card-illustration {
+            height: 100%;
+            width: auto;
+            min-width: 250px;
+            max-width: 350px;
+            object-fit: cover;
+            object-position: right center;
+            display: block;
+        }
+
+        /* Results Section Layout */
+        .results-container {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 24px;
+            min-height: 0;
+        }
+
+        /* Left Panel - School List */
+        .school-list-panel {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+
+        .list-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .list-header h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-dark);
+        }
+
+        .list-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            text-decoration: none;
+        }
+
+        .list-content {
+            flex: 1;
+            padding: 16px 16px 20px 16px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            margin-top: 4px;
+            padding-left: 4px;
+        }
+
+        .dot-likely {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: #4ade80;
+        }
+
+        .dot-target {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: #fb923c;
+        }
+
+        .school-card-mini {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px 16px;
+            display: flex;
+            gap: 14px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #fff;
+            align-items: center;
+        }
+
+        .school-card-mini:hover {
+            border-color: var(--primary-purple);
+            box-shadow: 0 2px 8px rgba(91, 43, 224, 0.08);
+        }
+
+        .school-card-mini.active {
+            border-color: var(--primary-purple);
+            box-shadow: 0 2px 12px rgba(91, 43, 224, 0.12);
+            background: rgba(91, 43, 224, 0.02);
+        }
+
+        .school-logo-mini {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .school-info-mini h3 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .school-meta-mini {
+            font-size: 0.73rem;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .meta-icon {
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+
+        .meta-green {
+            color: var(--success-green);
+        }
+
+        /* Right Panel - Details */
+        .school-details-panel {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid var(--border-light);
+        }
+
+        .details-header-section {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 4px;
+        }
+
+        .school-logo-large {
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px;
+            flex-shrink: 0;
+        }
+
+        .details-title-area {
+            flex: 1;
+        }
+
+        .details-title-area h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
+
+        .school-meta-large {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .school-meta-large .meta-item {
+            gap: 6px;
+        }
+
+        .link-website {
+            color: #0ea5e9;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+        }
+
+        .link-website:hover {
+            text-decoration: underline;
+        }
+
+        .btn-shortlist-add {
+            background-color: var(--danger-red);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.2s;
+            font-family: var(--font-main);
+        }
+
+        .btn-shortlist-add:hover {
+            background-color: #b91c1c;
+        }
+
+        /* Tabs */
+        .tabs-container {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            margin-top: 20px;
+            margin-bottom: 24px;
+            gap: 0;
+        }
+
+        .tab {
+            padding: 10px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #3b82f6;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            border: none;
+            background: none;
+            transition: all 0.2s;
+            position: relative;
+            bottom: -2px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab:hover:not(.active) {
+            color: var(--primary-purple);
+        }
+
+        .tab.active {
+            background-color: var(--primary-purple);
+            color: white;
+            border-radius: 8px 8px 0 0;
+            border-bottom: 2px solid var(--primary-purple);
+        }
+
+        .tab-icon {
+            font-size: 13px;
+        }
+
+        /* Tab Content Panels */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 28px;
+        }
+
+        .section-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-text {
+            font-size: 0.87rem;
+            line-height: 1.7;
+            color: var(--text-medium);
+        }
+
+        .facts-list {
+            list-style: disc;
+            padding-left: 22px;
+            font-size: 0.87rem;
+            line-height: 2;
+            color: var(--text-dark);
+        }
+
+        .facts-list li {
+            padding-left: 4px;
+        }
+
+        .facts-list strong {
+            font-weight: 700;
+        }
+
+        /* "Am I A Good Fit" Tab Styles */
+        .fit-assessment-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fit-section-heading {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fit-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            line-height: 1.65;
+        }
+
+        .fit-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .fit-dot-green {
+            background-color: #22c55e;
+        }
+
+        .fit-dot-red {
+            background-color: #ef4444;
+        }
+
+        .fit-item-text {
+            font-size: 0.87rem;
+            color: var(--text-medium);
+        }
+
+        .fit-item-text strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .fit-summary {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .fit-summary-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fit-summary p {
+            font-size: 0.87rem;
+            line-height: 1.7;
+            color: var(--text-medium);
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* ----- Added from Reference.html UI ----- */
+        .card {
+            background: var(--white);
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(91, 43, 224, 0.08);
+        }
+
+        .section-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--purple);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-left: 3px solid var(--purple);
+            padding-left: 10px;
+            background: var(--purple-pale);
+            border-radius: 0 6px 6px 0;
+            padding: 7px 12px 7px 10px;
+        }
+
+        /* ── OVERVIEW GRID ── */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border: 1px solid var(--rule);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 14px;
+            margin-bottom: 28px;
+        }
+
+        .ov-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 11px 16px;
+            border-bottom: 1px solid var(--rule);
+            border-right: 1px solid var(--rule);
+        }
+
+        .ov-row:nth-child(even) {
+            border-right: none;
+        }
+
+        .ov-row:nth-last-child(-n+2) {
+            border-bottom: none;
+        }
+
+        .ov-label {
+            font-size: 13px;
+            color: var(--i60);
+        }
+
+        .ov-val {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--ink);
+            text-align: right;
+        }
+
+        /* ── MAJOR PILLS ── */
+        .major-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+
+        .major-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            background: var(--white);
+            border: 1px solid var(--rule);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: border-color 0.12s;
+        }
+
+        .major-pill:hover {
+            border-color: var(--purple);
+        }
+
+        .major-pill.active {
+            border-color: var(--purple);
+            background: var(--purple-pale);
+        }
+
+        .major-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+            color: white;
+        }
+
+        .major-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .major-pct {
+            font-size: 12px;
+            color: var(--i30);
+        }
+
+        .your-major {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+            background: var(--purple);
+            color: white;
+        }
+
+        /* ── ABOUT MAJOR ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 14px;
+            margin-bottom: 28px;
+        }
+
+        .about-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .about-text {
+            font-size: 12px;
+            color: var(--i60);
+            line-height: 1.75;
+            margin-bottom: 10px;
+        }
+
+        .read-more {
+            font-size: 12px;
+            color: var(--purple);
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--i60);
+            padding: 5px 0;
+            border-bottom: 1px solid var(--i10);
+            line-height: 1.5;
+        }
+
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .checklist li i {
+            color: var(--purple);
+            font-size: 15px;
+            margin-top: 1px;
+            flex-shrink: 0;
+        }
+
+        /* ── STUDENT CARDS ── */
+        .student-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        .student-card {
+            text-align: center;
+            padding: 14px 8px;
+        }
+
+        .student-icon {
+            font-size: 28px;
+            color: var(--purple);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .student-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .student-desc {
+            font-size: 11px;
+            color: var(--i60);
+            line-height: 1.45;
+        }
+
+        /* ── CAMPUS VIBES ── */
+        .campus-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .campus-card {
+            padding: 4px 0;
+        }
+
+        .campus-icon {
+            font-size: 22px;
+            color: var(--purple);
+            margin-bottom: 8px;
+            display: flex;
+        }
+
+        .campus-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--i30);
+            margin-bottom: 3px;
+        }
+
+        .campus-val {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--ink);
+            line-height: 1.1;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin-bottom: 2px;
+        }
+
+        .campus-sub {
+            font-size: 11px;
+            color: var(--i60);
+        }
+
+        /* ── ADMISSIONS ── */
+        .g2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .g3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .ct {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--purple);
+            margin-bottom: 14px;
+            padding: 7px 12px 7px 10px;
+            border-left: 3px solid var(--purple);
+            background: var(--purple-pale);
+            border-radius: 0 6px 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dr {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--i10);
+            font-size: 13px;
+        }
+
+        .dr:last-child {
+            border-bottom: none;
+        }
+
+        .drl {
+            color: var(--i60);
+        }
+
+        .drv {
+            font-weight: 600;
+            color: var(--ink);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+        }
+
+        .stat {
+            background: var(--white);
+            border: 1px solid var(--rule);
+            border-radius: 10px;
+            padding: 14px 16px;
+        }
+
+        .stat.ac {
+            background: var(--purple);
+            border-color: var(--purple);
+        }
+
+        .sl {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--i30);
+            margin-bottom: 5px;
+        }
+
+        .stat.ac .sl {
+            color: rgba(255, 255, 255, .6);
+        }
+
+        .sv {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--ink);
+            line-height: 1;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .stat.ac .sv {
+            color: #fff;
+        }
+
+        .ss {
+            font-size: 11px;
+            color: var(--i30);
+            margin-top: 4px;
+        }
+
+        .stat.ac .ss {
+            color: rgba(255, 255, 255, .5);
+        }
+
+        /* EA pills */
+        .ea-w {
+            display: flex;
+            gap: 7px;
+            margin-bottom: 12px;
+        }
+
+        .eab {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 5px 12px;
+            border-radius: 7px;
+        }
+
+        .eaon {
+            background: var(--purple);
+            color: #fff;
+        }
+
+        .eaoff {
+            background: var(--i10);
+            color: var(--i30);
+            text-decoration: line-through;
+        }
+
+        /* Test pill */
+        .tpill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--purple);
+            padding: 9px 14px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tdot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .6);
+            flex-shrink: 0;
+        }
+
+        .tlbl {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* Score bars */
+        .sb {
+            margin-bottom: 14px;
+        }
+
+        .sbh {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .sbl {
+            color: var(--i60);
+        }
+
+        .sbv {
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .sbt {
+            position: relative;
+            height: 7px;
+            background: var(--i10);
+            border-radius: 4px;
+        }
+
+        .sbf {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            background: var(--purple);
+            border-radius: 4px;
+        }
+
+        .sbk {
+            position: absolute;
+            top: -2px;
+            width: 1.5px;
+            height: 11px;
+            background: var(--purple-dark);
+            border-radius: 1px;
+        }
+
+        .sbe {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3px;
+            font-size: 10px;
+            color: var(--i30);
+        }
+
+        /* GPA bars */
+        .gpa-r {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .gpa-l {
+            font-size: 11px;
+            color: var(--i60);
+            width: 72px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .gpa-t {
+            flex: 1;
+            height: 20px;
+            background: var(--i10);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .gpa-f {
+            height: 100%;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            padding-left: 7px;
+        }
+
+        .gpa-fl {
+            font-size: 10px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .gpa-o {
+            font-size: 11px;
+            color: var(--i60);
+            width: 40px;
+        }
+
+        /* Factor bars */
+        .fcr {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .fcl {
+            font-size: 12px;
+            color: var(--i60);
+            width: 190px;
+            text-align: right;
+            flex-shrink: 0;
+            line-height: 1.3;
+        }
+
+        .fct {
+            flex: 1;
+            height: 20px;
+            background: var(--i10);
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .fcb {
+            height: 100%;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            padding-left: 7px;
+        }
+
+        .fcbl {
+            font-size: 9px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .fcol {
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 9px;
+            color: var(--i30);
+            white-space: nowrap;
+        }
+
+        .fcleg {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .fcli {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            color: var(--i60);
+        }
+
+        .fcld {
+            width: 11px;
+            height: 11px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .note {
+            font-size: 11px;
+            color: var(--i30);
+            font-style: italic;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+        /* COA bars */
+        .coa-i {
+            margin-bottom: 9px;
+        }
+
+        .coa-h {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .coa-lb {
+            color: var(--i60);
+        }
+
+        .coa-v {
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .coa-b {
+            height: 5px;
+            background: var(--i10);
+            border-radius: 3px;
+        }
+
+        .coa-bf {
+            height: 100%;
+            border-radius: 3px;
+        }
+
+        .coa-tot {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding-top: 12px;
+            margin-top: 14px;
+            border-top: 1.5px solid var(--rule);
+        }
+
+        .coa-tl {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        .coa-tv {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--purple);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Grad rings */
+        .card.dark {
+            background: var(--ink);
+            border-color: var(--ink);
+        }
+
+        /* Fit section */
+        .fit-hdr {
+            background: var(--purple);
+            border-radius: 12px;
+            padding: 20px 22px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 14px;
+        }
+
+        .fsn {
+            font-size: 44px;
+            font-weight: 800;
+            line-height: 1;
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .fsl {
+            font-size: 10px;
+            opacity: .7;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin-top: 3px;
+            color: #fff;
+        }
+
+        .fdiv {
+            width: 1px;
+            height: 52px;
+            background: rgba(255, 255, 255, .2);
+        }
+
+        .fvrd {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .fsum {
+            font-size: 13px;
+            opacity: .8;
+            margin-top: 5px;
+            line-height: 1.6;
+            color: #fff;
+        }
+
+        .sg {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .sgt {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 3px;
+        }
+
+        .sgd {
+            font-size: 12px;
+            color: var(--i60);
+            margin-top: 3px;
+            line-height: 1.5;
+        }
+
+        .insight {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 10px;
+            padding: 14px 16px;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .il {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: #92400e;
+            margin-bottom: 4px;
+        }
+
+        .it {
+            font-size: 13px;
+            color: #78350f;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .ai-hdr {
+            background: var(--purple);
+            border-radius: 12px;
+            padding: 20px 22px;
+            margin-bottom: 14px;
+        }
+
+        .ai-ey {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .5);
+            margin-bottom: 7px;
+        }
+
+        .ai-hl {
+            font-size: 16px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.4;
+        }
+
+        .ai-bd {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .ai-bp {
+            background: rgba(255, 255, 255, .15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .ai-action {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(91, 43, 224, 0.25);
+        }
+
+        .ai-action:last-child {
+            border-bottom: none;
+        }
+
+        .aim {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin-bottom: 7px;
+            flex-wrap: wrap;
+        }
+
+        .ph {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .ph-h {
+            color: #991b1b;
+            background: #fee2e2;
+        }
+
+        .ph-m {
+            color: #92400e;
+            background: #fef3c7;
+        }
+
+        .ph-l {
+            color: var(--i60);
+            background: var(--i10);
+        }
+
+        .catb {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .atl {
+            font-size: 10px;
+            color: var(--i30);
+            margin-left: auto;
+        }
+
+        .at {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .ad {
+            font-size: 12px;
+            color: var(--i60);
+            line-height: 1.6;
+        }
+
+        /* Finance divider label */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 4px 0;
+        }
+
+        .section-divider span {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--i30);
+            white-space: nowrap;
+        }
+
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--rule);
+        }
+
+        .section-divider::before {
+            display: none;
+        }
+
+        /* ----- 3D Balls for categories ----- */
+        .ball-green {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #4ade80, #166534);
+            box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.3), 1px 1px 3px rgba(0, 0, 0, 0.25);
+            flex-shrink: 0;
+        }
+
+        .ball-blue {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #60a5fa, #1e3a8a);
+            box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.3), 1px 1px 3px rgba(0, 0, 0, 0.25);
+            flex-shrink: 0;
+        }
+
+        .ball-red {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #f87171, #7f1d1d);
+            box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.3), 1px 1px 3px rgba(0, 0, 0, 0.25);
+            flex-shrink: 0;
+        }
+
+        /* ----- Enhanced Animations & 3D Effects ----- */
+        .school-card-mini {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .school-card-mini:hover {
+            transform: translateX(4px) scale(1.01);
+            box-shadow: 0 4px 16px rgba(91, 43, 224, 0.1);
+        }
+
+        .school-card-mini.active {
+            transform: translateX(4px);
+            box-shadow: 0 2px 12px rgba(91, 43, 224, 0.12);
+        }
+
+        .tab {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tab:hover:not(.active) {
+            transform: translateY(-2px);
+            color: var(--primary-purple);
+        }
+
+        .btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(91, 43, 224, 0.35);
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(0.97);
+            box-shadow: none;
+        }
+
+        /* 3D card depth for school list and details */
+        .school-list-panel {
+            box-shadow:
+                0 10px 30px -8px rgba(0, 0, 0, 0.08),
+                0 4px 10px -4px rgba(0, 0, 0, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .school-list-panel:hover {
+            box-shadow:
+                0 14px 40px -10px rgba(91, 43, 224, 0.12),
+                0 6px 14px -6px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .school-details-panel {
+            box-shadow:
+                0 10px 30px -8px rgba(0, 0, 0, 0.08),
+                0 4px 10px -4px rgba(0, 0, 0, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            transition: all 0.35s ease;
+        }
+
+        @keyframes fadeInContent {
+            from {
+                opacity: 0.3;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .school-details-panel.refreshing {
+            animation: fadeInContent 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* 3D search card hover */
+        .search-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .search-card:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 16px 32px -10px rgba(91, 43, 224, 0.3),
+                0 6px 12px -4px rgba(91, 43, 224, 0.18),
+                inset 0 2px 4px rgba(255, 255, 255, 0.8),
+                inset 0 -3px 6px rgba(186, 173, 244, 0.5);
+        }
+
+        /* Nav link smooth hover */
+        .nav-link {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Icon button hover glow */
+        .icon-btn {
+            transition: all 0.3s ease;
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 12px rgba(91, 43, 224, 0.15);
+        }
+
+        /* ----- Responsive Breakpoints ----- */
+        @media (max-width: 1200px) {
+            .results-container {
+                grid-template-columns: 320px 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 220px;
+                min-width: 220px;
+            }
+
+            .main-wrapper {
+                margin-left: 220px;
+            }
+
+            .results-container {
+                grid-template-columns: 1fr;
+            }
+
+            .school-details-panel {
+                padding: 24px;
+            }
+
+            .search-form {
+                flex-wrap: wrap;
+            }
+
+            .input-group {
+                min-width: 240px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main-wrapper {
+                margin-left: 0;
+            }
+
+            .global-header {
+                padding: 0 16px;
+            }
+
+            .content-sticky-header {
+                padding: 16px 16px 0 16px;
+            }
+
+            .content-scrollable {
+                padding: 0 16px 16px 16px;
+            }
+
+            .search-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .input-group {
+                max-width: 100%;
+                min-width: 100%;
+            }
+
+            .page-header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .details-header-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .tabs-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .user-info {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="global-header">
+        <div class="global-header-left">
+            <a href="#" class="logo">
+                <img src="assets/logo-[ 2900 x 500 ] .png" alt="DreamCollege.ai Logo">
+            </a>
+            <div class="collapse-btn" title="Collapse sidebar" id="collapseSidebarBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6" />
+                    <path d="M11 18l-6-6 6-6" />
+                </svg>
+            </div>
+        </div>
+        <div class="global-header-right">
+            <button class="icon-btn" title="Theme">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5" />
+                    <path
+                        d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                </svg>
+            </button>
+            <button class="icon-btn" title="Fullscreen">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+                </svg>
+            </button>
+            <button class="icon-btn" title="Logout">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+                </svg>
+            </button>
+            <div class="user-profile">
+                <img src="https://placehold.co/40x40/d4d4d8/71717a?text=O" alt="Olivia Martinez" class="user-avatar">
+                <div class="user-info">
+                    <span class="user-name">Olivia Martinez</span>
+                    <span class="user-role">Student</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+
+        <aside class="sidebar" id="sidebar">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24">
+                            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" />
+                        </svg>
+                        Student Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active-dropdown" id="collegePlanningToggle">
+                        <svg class="nav-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72l5 2.73 5-2.73v3.72z" />
+                        </svg>
+                        College Planning
+                        <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6 6-6" />
+                        </svg>
+                    </a>
+                    <ul class="sub-menu" id="collegePlanningSub">
+                        <li><a href="#" class="sub-link">Careers</a></li>
+                        <li><a href="#" class="sub-link">College Profile</a></li>
+                        <li><a href="#" class="sub-link">Profile Assessment</a></li>
+                        <li><a href="#" class="sub-link">Majors</a></li>
+                        <li><a href="#" class="sub-link active">Colleges</a></li>
+                        <li><a href="#" class="sub-link">Activities</a></li>
+                        <li><a href="#" class="sub-link">Scholarships</a></li>
+                        <li><a href="#" class="sub-link">Shortlist</a></li>
+                    </ul>
+                </li>
+
+                <div class="nav-divider"></div>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.34.16-2h4.68c.09.66.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z" />
+                        </svg>
+                        College Application
+                        <svg class="dropdown-arrow" style="margin-left:auto;" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18l6-6-6-6" />
+                        </svg>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
+                        </svg>
+                        Notices
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z" />
+                        </svg>
+                        LiveChat
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <div class="main-wrapper">
+
+            <div class="content-area">
+
+                <div class="page-header">
+                    <div class="page-title">
+                        <h1>College Recommendation</h1>
+                        <div class="breadcrumbs">
+                            <a href="#">Home</a><span>/</span><a href="#">College Planning</a><span>/</span><a
+                                href="#">College Recommendation</a><span>/</span>Build College List
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" style="margin-top: 2px;">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="8" y1="6" x2="21" y2="6"></line>
+                            <line x1="8" y1="12" x2="21" y2="12"></line>
+                            <line x1="8" y1="18" x2="21" y2="18"></line>
+                            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                        </svg>
+                        Shortlist
+                    </button>
+                </div>
+
+                <div class="search-card">
+                    <div class="search-card-left">
+                        <p class="search-subtitle">Let's Build Your Perfect College List! Your Dream College Is Just A
+                            Click Away!</p>
+                        <div class="search-form">
+                            <div class="input-group">
+                                <label>
+                                    Desired Major
+                                    <span class="info-icon"
+                                        data-tooltip="Select majors from your major recommendation">i</span>
+                                </label>
+                                <div class="major-search-wrapper">
+                                    <input type="text" id="majorSearchInput" placeholder="Search for a major..."
+                                        autocomplete="off">
+                                    <div class="major-dropdown" id="majorDropdown"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary">
+                                <img src="assets/Star.png" class="star-icon" alt="Star"> Find Your Best Fit Colleges!
+                            </button>
+                            <button class="btn btn-primary">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                Manual Search
+                            </button>
+                        </div>
+                    </div>
+                    <div class="search-card-right">
+                    </div>
+                </div>
+
+                <div class="results-container">
+
+                    <div class="school-list-panel">
+                        <div class="list-header">
+                            <h2>
+                                <img src="assets/Star.png" class="star-icon" alt="Star"> AI Recommended School List
+                            </h2>
+                            <p class="list-subtitle">Based On Your Profile,preference,and Aspiration</p>
+                        </div>
+
+                        <div class="list-content">
+                            <div class="category-header">
+                                <div class="ball-green"></div>
+                                Likely Schools
+                            </div>
+
+                            <div class="school-card-mini active" data-school="ut" onclick="selectSchool(this, 'ut')">
+                                <img src="assets/University of Texas at Austin.png" alt="UT Austin"
+                                    class="school-logo-mini">
+                                <div class="school-info-mini">
+                                    <h3>University of Texas at Austin</h3>
+                                    <div class="school-meta-mini">
+                                        <span class="meta-item"><span class="meta-icon" style="color:#ef4444;">📍</span>
+                                            Austin, Texas</span>
+                                        <span class="meta-item"><span class="meta-icon" style="color:#f59e0b;">🏆</span>
+                                            #38 National Ranking</span>
+                                        <span class="meta-item meta-green"><span class="meta-icon">✅</span> Admission
+                                            Rate:32%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="school-card-mini" data-school="tam" onclick="selectSchool(this, 'tam')">
+                                <img src="assets/Texas A&M University.png" alt="Texas A&M"
+                                    class="school-logo-mini">
+                                <div class="school-info-mini">
+                                    <h3>Texas A&M University</h3>
+                                    <div class="school-meta-mini">
+                                        <span class="meta-item"><span class="meta-icon" style="color:#ef4444;">📍</span>
+                                            College Station, Texas</span>
+                                        <span class="meta-item"><span class="meta-icon" style="color:#f59e0b;">🏆</span>
+                                            #41 National Ranking</span>
+                                        <span class="meta-item meta-green"><span class="meta-icon">✅</span> Admission
+                                            Rate:57%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="school-card-mini" data-school="usc" onclick="selectSchool(this, 'usc')">
+                                <img src="assets/University of South Carolina.jpg" alt="U of South Carolina"
+                                    class="school-logo-mini">
+                                <div class="school-info-mini">
+                                    <h3>University of South Carolina</h3>
+                                    <div class="school-meta-mini">
+                                        <span class="meta-item"><span class="meta-icon" style="color:#ef4444;">📍</span>
+                                            Columbia, South Carolina</span>
+                                        <span class="meta-item"><span class="meta-icon" style="color:#f59e0b;">🏆</span>
+                                            #76 National Ranking</span>
+                                        <span class="meta-item meta-green"><span class="meta-icon">✅</span> Admission
+                                            Rate:63%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="category-header" style="margin-top:24px;">
+                                <div class="ball-blue"></div>
+                                Target Schools
+                            </div>
+
+                            <div class="school-card-mini" data-school="umich" onclick="selectSchool(this, 'umich')">
+                                <img src="assets/University of Michigan, Ann Arbor.png" alt="U of Michigan"
+                                    class="school-logo-mini">
+                                <div class="school-info-mini">
+                                    <h3>University of Michigan, Ann Arbor</h3>
+                                    <div class="school-meta-mini">
+                                        <span class="meta-item"><span class="meta-icon" style="color:#ef4444;">📍</span>
+                                            Ann Arbor, Michigan</span>
+                                        <span class="meta-item"><span class="meta-icon" style="color:#f59e0b;">🏆</span>
+                                            #21 National Ranking</span>
+                                        <span class="meta-item meta-green"><span class="meta-icon">✅</span> Admission
+                                            Rate:20%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="school-card-mini" data-school="iu" onclick="selectSchool(this, 'iu')">
+                                <img src="assets/Indiana University Bloomington.png" alt="Indiana U"
+                                    class="school-logo-mini">
+                                <div class="school-info-mini">
+                                    <h3>Indiana University Bloomington</h3>
+                                    <div class="school-meta-mini">
+                                        <span class="meta-item"><span class="meta-icon" style="color:#ef4444;">📍</span>
+                                            Bloomington, Indiana</span>
+                                        <span class="meta-item"><span class="meta-icon" style="color:#f59e0b;">🏆</span>
+                                            #73 National Ranking</span>
+                                        <span class="meta-item meta-green"><span class="meta-icon">✅</span> Admission
+                                            Rate:80%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="category-header" style="margin-top:24px;">
+                                <div class="ball-red"></div>
+                                Reach Schools
+                            </div>
+
+                            <div class="school-card-mini" data-school="upenn" onclick="selectSchool(this, 'upenn')">
+                                <img src="assets/University of Pennsylvania.jpg" alt="U of Pennsylvania"
+                                    class="school-logo-mini">
+                                <div class="school-info-mini">
+                                    <h3>University of Pennsylvania</h3>
+                                    <div class="school-meta-mini">
+                                        <span class="meta-item"><span class="meta-icon" style="color:#ef4444;">📍</span>
+                                            Philadelphia, Pennsylvania</span>
+                                        <span class="meta-item"><span class="meta-icon" style="color:#f59e0b;">🏆</span>
+                                            #6 National Ranking</span>
+                                        <span class="meta-item meta-green"><span class="meta-icon">✅</span> Admission
+                                            Rate:4%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="school-card-mini" data-school="harvard" onclick="selectSchool(this, 'harvard')">
+                                <img src="assets/Harvard University.jpg" alt="Harvard University"
+                                    class="school-logo-mini">
+                                <div class="school-info-mini">
+                                    <h3>Harvard University</h3>
+                                    <div class="school-meta-mini">
+                                        <span class="meta-item"><span class="meta-icon" style="color:#ef4444;">📍</span>
+                                            Cambridge, Massachusetts</span>
+                                        <span class="meta-item"><span class="meta-icon" style="color:#f59e0b;">🏆</span>
+                                            #3 National Ranking</span>
+                                        <span class="meta-item meta-green"><span class="meta-icon">✅</span> Admission
+                                            Rate:3.6%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="school-card-mini" data-school="stanford"
+                                onclick="selectSchool(this, 'stanford')">
+                                <img src="assets/Stanford University.jpg" alt="Stanford University"
+                                    class="school-logo-mini">
+                                <div class="school-info-mini">
+                                    <h3>Stanford University</h3>
+                                    <div class="school-meta-mini">
+                                        <span class="meta-item"><span class="meta-icon" style="color:#ef4444;">📍</span>
+                                            Stanford, California</span>
+                                        <span class="meta-item"><span class="meta-icon" style="color:#f59e0b;">🏆</span>
+                                            #3 National Ranking</span>
+                                        <span class="meta-item meta-green"><span class="meta-icon">✅</span> Admission
+                                            Rate:4%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="school-details-panel">
+
+                        <div class="details-header-section">
+                            <img src="assets/University of Texas at Austin.png" alt="UT Austin Logo"
+                                class="school-logo-large">
+                            <div class="details-title-area">
+                                <h2>University of Texas at Austin</h2>
+                                <div class="school-meta-large">
+                                    <span class="meta-item"><span class="meta-icon" style="color:#ef4444;">📍</span>
+                                        Austin, Texas</span>
+                                    <span class="meta-item"><span class="meta-icon" style="color:#f59e0b;">🏆</span> #38
+                                        National Ranking</span>
+                                    <span class="meta-item meta-green"><span class="meta-icon">✅</span> Admission
+                                        Rate:32%</span>
+                                    <a href="#" class="link-website"><span class="meta-icon">🌐</span> Visit School
+                                        Website</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn-shortlist-add">+ Shortlist</button>
+
+                        <div class="tabs-container">
+                            <div class="tab active" data-tab="overview" onclick="switchTab(this, 'overview')">
+                                <span class="tab-icon">Overview</span>
+                            </div>
+                            <div class="tab" data-tab="admissions" onclick="switchTab(this, 'admissions')">
+                                <span class="tab-icon">Admissions</span>
+                            </div>
+                            <div class="tab" data-tab="finances" onclick="switchTab(this, 'finances')">
+                                <span class="tab-icon">Finances &amp; Outcomes</span>
+                            </div>
+                            <div class="tab" data-tab="fit" onclick="switchTab(this, 'fit')">
+                                <span class="tab-icon">🎯 Am I a Good Fit?</span>
+                            </div>
+                            <div class="tab" data-tab="chance" onclick="switchTab(this, 'chance')">
+                                <span class="tab-icon">🚀 How to Increase My Chance</span>
+                            </div>
+                        </div>
+
+                        <!-- OVERVIEW -->
+                        <div id="tab-overview" class="tab-content active">
+                            <!-- University Overview -->
+                            <div class="card">
+                                <div class="ct">University Overview</div>
+                                <p id="ov-description" style="font-size:13px;color:var(--i60);line-height:1.75;">Harvard
+                                    University is a private Ivy League research university...</p>
+                                <div class="overview-grid">
+                                    <div class="ov-row"><span class="ov-label">Setting</span><span class="ov-val"
+                                            id="ov-setting">Urban, Cambridge MA</span></div>
+                                    <div class="ov-row"><span class="ov-label">Type</span><span class="ov-val"
+                                            id="ov-type">Private nonprofit</span></div>
+                                    <div class="ov-row"><span class="ov-label">Founded</span><span class="ov-val"
+                                            id="ov-founded">1636</span></div>
+                                    <div class="ov-row"><span class="ov-label">Undergrad enrollment</span><span
+                                            class="ov-val" id="ov-enrollment">7,038</span></div>
+                                    <div class="ov-row"><span class="ov-label">Student-faculty ratio</span><span
+                                            class="ov-val" id="ov-ratio">7:1</span></div>
+                                    <div class="ov-row"><span class="ov-label">6-year graduation rate</span><span
+                                            class="ov-val" id="ov-grad">97.6%</span></div>
+                                    <div class="ov-row"><span class="ov-label">Avg class size</span><span class="ov-val"
+                                            id="ov-class-size">12 students</span></div>
+                                    <div class="ov-row"><span class="ov-label">1st-year retention</span><span
+                                            class="ov-val" id="ov-retention">98%</span></div>
+                                </div>
+                            </div>
+
+                            <!-- Top Majors -->
+                            <div class="card">
+                                <div class="ct" id="top-majors-title">Top Majors</div>
+                                <div class="major-pills" id="ov-majors">
+                                </div>
+                            </div>
+
+                            <!-- About the Major -->
+                            <div class="card">
+                                <div class="ct" id="about-major-title">About the Major <span
+                                        style="font-size:10px;font-weight:500;text-transform:none;letter-spacing:0;color:var(--i60);">&nbsp;—
+                                        matched to your interest</span></div>
+                                <div class="about-grid">
+                                    <div>
+                                        <div class="about-title">About the major</div>
+                                        <p class="about-text" id="about-major-text"></p>
+                                        <a class="read-more" href="#">Read more <i class="ti ti-arrow-right"
+                                                style="font-size:12px;"></i></a>
+                                    </div>
+                                    <div>
+                                        <div class="about-title">Why students choose this major</div>
+                                        <ul class="checklist" id="about-major-reasons">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- What Kind of Students -->
+                            <div class="card">
+                                <div class="ct" id="student-traits-title">What Kind of Students Do They Look For?</div>
+                                <p id="student-traits-desc"
+                                    style="font-size:13px;color:var(--i60);line-height:1.7;margin-bottom:16px;"></p>
+                                <div class="student-grid" id="student-traits-grid">
+                                </div>
+                            </div>
+
+                            <!-- Campus Vibes -->
+                            <div class="card">
+                                <div class="ct">Campus Vibes &amp; Life Highlights</div>
+                                <div class="campus-grid" id="campus-vibes-grid">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ADMISSIONS -->
+                        <div id="tab-admissions" class="tab-content">
+                            <div class="g2">
+                                <div class="card">
+                                    <div class="ct">Application numbers</div>
+                                    <div class="dr"><span class="drl">Total applicants</span><span class="drv"
+                                            id="adm-applicants"></span></div>
+                                    <div class="dr"><span class="drl">Total admitted</span><span class="drv"
+                                            id="adm-admitted"></span></div>
+                                    <div class="dr"><span class="drl">Total enrolled</span><span class="drv"
+                                            id="adm-enrolled"></span></div>
+                                    <div class="dr"><span class="drl">Acceptance rate</span><span class="drv"
+                                            id="adm-acceptance"></span></div>
+                                    <div class="dr"><span class="drl">Yield rate</span><span class="drv"
+                                            id="adm-yield"></span></div>
+                                </div>
+                                <div class="card">
+                                    <div class="ct">Early programs</div>
+                                    <div class="ea-w" id="adm-ea-pills"></div>
+                                    <div class="dr"><span class="drl">EA deadline</span><span class="drv"
+                                            id="adm-ea-dead"></span></div>
+                                    <div class="dr"><span class="drl">Notification</span><span class="drv"
+                                            id="adm-ea-notif"></span></div>
+                                    <div class="dr"><span class="drl">Restrictive?</span><span class="drv"
+                                            id="adm-ea-rest"></span></div>
+                                    <div class="dr"><span class="drl">ED offered?</span><span class="drv"
+                                            id="adm-ed"></span></div>
+                                </div>
+                            </div>
+                            <div class="g2">
+                                <div class="card">
+                                    <div class="ct">Test policy</div>
+                                    <div class="tpill"><span class="tdot"></span><span class="tlbl"
+                                            id="adm-test-policy"></span></div>
+                                    <div class="dr"><span class="drl">% submitting SAT</span><span class="drv"
+                                            id="adm-sat-pct"></span></div>
+                                    <div class="dr"><span class="drl">% submitting ACT</span><span class="drv"
+                                            id="adm-act-pct"></span></div>
+                                </div>
+                                <div class="card">
+                                    <div class="ct">Score ranges — middle 50%</div>
+                                    <div id="score-bars"></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="ct" id="gpa-title">GPA distribution (weighted)</div>
+                                <div id="gpa-bars"></div>
+                            </div>
+                            <div class="card">
+                                <div class="ct">Admission factors (C7)</div>
+                                <div class="fcleg">
+                                    <div class="fcli">
+                                        <div class="fcld" style="background:var(--purple)"></div>Very important
+                                    </div>
+                                    <div class="fcli">
+                                        <div class="fcld" style="background:#C4B5FD"></div>Considered
+                                    </div>
+                                    <div class="fcli">
+                                        <div class="fcld" style="background:var(--i10);border:1px solid var(--rule)">
+                                        </div>Not considered
+                                    </div>
+                                </div>
+                                <div id="factor-bars"></div>
+                                <p class="note" id="factors-note"></p>
+                            </div>
+                        </div>
+
+                        <!-- FINANCES & OUTCOMES -->
+                        <div id="tab-finances" class="tab-content">
+                            <div class="section-divider"><span>Finances</span></div>
+                            <div class="g2">
+                                <div class="card">
+                                    <div class="ct">Cost of attendance 2025–26</div>
+                                    <div id="coa-bars"></div>
+                                    <div class="coa-tot"><span class="coa-tl">Total COA</span><span class="coa-tv"
+                                            id="fin-coa-tot"></span></div>
+                                </div>
+                                <div class="card">
+                                    <div class="ct">Financial aid</div>
+                                    <div class="dr"><span class="drl">% freshmen with need</span><span class="drv"
+                                            id="fin-need-pct"></span></div>
+                                    <div class="dr"><span class="drl">% need fully met</span><span class="drv"
+                                            id="fin-met-pct"></span></div>
+                                    <div class="dr"><span class="drl">Avg aid package</span><span class="drv"
+                                            id="fin-avg-aid"></span></div>
+                                    <div class="dr"><span class="drl">Avg need-based grant</span><span class="drv"
+                                            id="fin-avg-grant"></span></div>
+                                    <div class="dr"><span class="drl">Avg loan component</span><span class="drv"
+                                            id="fin-avg-loan"></span></div>
+                                    <div class="card dark" style="margin-top:14px;padding:14px 16px;"
+                                        id="fin-initiative-card">
+                                        <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#A78BFA;margin-bottom:7px;"
+                                            id="fin-initiative-title">Financial Aid Initiative</div>
+                                        <p style="font-size:12px;color:rgba(255,255,255,.65);line-height:1.7;"
+                                            id="fin-initiative-desc"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section-divider"><span>Outcomes</span></div>
+                            <div class="g3">
+                                <div class="stat ac">
+                                    <div class="sl">Retention rate</div>
+                                    <div class="sv" id="out-retention"></div>
+                                    <div class="ss">Fall 2023 → Fall 2024</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="sl">4-yr graduation</div>
+                                    <div class="sv" id="out-grad4"></div>
+                                    <div class="ss">Fall 2018 cohort</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="sl">6-yr graduation</div>
+                                    <div class="sv" id="out-grad6"></div>
+                                    <div class="ss">Fall 2018 cohort</div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="ct">Graduation rate progression</div>
+                                <div id="out-rings"
+                                    style="display:flex;justify-content:space-around;align-items:center;padding:16px 0 8px;gap:16px;flex-wrap:wrap;">
+                                </div>
+                                <p class="note" id="out-rings-note"></p>
+                            </div>
+                            <div class="card">
+                                <div class="ct">Institution snapshot</div>
+                                <div class="dr"><span class="drl">Institution type</span><span class="drv"
+                                        id="out-snap-type"></span></div>
+                                <div class="dr"><span class="drl">Setting</span><span class="drv"
+                                        id="out-snap-setting"></span></div>
+                                <div class="dr"><span class="drl">Student–faculty ratio</span><span class="drv"
+                                        id="out-snap-ratio"></span></div>
+                                <div class="dr"><span class="drl">Undergraduate enrollment</span><span class="drv"
+                                        id="out-snap-enroll"></span></div>
+                                <div class="dr"><span class="drl">Freshmen on campus</span><span class="drv"
+                                        id="out-snap-freshmen"></span></div>
+                            </div>
+                        </div>
+
+                        <!-- AM I A GOOD FIT -->
+                        <div id="tab-fit" class="tab-content">
+                            <div class="fit-hdr">
+                                <div>
+                                    <div class="fsn" id="fit-score"></div>
+                                    <div class="fsl">Fit Score</div>
+                                </div>
+                                <div class="fdiv"></div>
+                                <div>
+                                    <div class="fvrd" id="fit-match"></div>
+                                    <div class="fsum" id="fit-summary"></div>
+                                </div>
+                            </div>
+                            <div class="g2" id="fit-academic-culture-cards">
+                            </div>
+                            <div class="sg" id="fit-strengths-gaps">
+                            </div>
+                            <div class="card">
+                                <div class="ct">Culture Fit — Deep Dive</div>
+                                <p style="font-size:12px;color:var(--i60);line-height:1.7;margin-bottom:14px;"
+                                    id="fit-culture-desc"></p>
+                                <div style="display:flex;flex-direction:column;gap:0;" id="fit-culture-bars">
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="ct">Academic Factor-by-Factor Analysis</div>
+                                <div id="factor-analysis"></div>
+                            </div>
+                        </div>
+
+                        <!-- HOW TO INCREASE MY CHANCE -->
+                        <div id="tab-chance" class="tab-content">
+                            <div class="ai-hdr">
+                                <div class="ai-ey" id="chance-strategy-eyebrow"></div>
+                                <div class="ai-hl" id="chance-strategy-headline"></div>
+                                <div class="ai-bd" id="chance-strategy-badges">
+                                </div>
+                            </div>
+                            <div class="insight">
+                                <i class="ti ti-bulb"
+                                    style="font-size:20px;color:#92400e;flex-shrink:0;margin-top:2px;"></i>
+                                <div>
+                                    <div class="il">Key Insight</div>
+                                    <p class="it" id="chance-insight"></p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="ct">Action plan</div>
+                                <div id="action-plan"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="database/api_client.js"></script>
+    <script>
+        // Initialize the Database API with our mock API Key
+        const dbAPI = new DreamCollegeAPI("DREAM_COLLEGE_API_v1_847294");
+        var sidebar = document.getElementById('sidebar');
+        var collapseBtn = document.getElementById('collapseSidebarBtn');
+        var collegePlanningToggle = document.getElementById('collegePlanningToggle');
+        var collegePlanningSub = document.getElementById('collegePlanningSub');
+
+        collapseBtn.addEventListener('click', function () {
+            sidebar.classList.toggle('collapsed');
+            var mainWrapper = document.querySelector('.main-wrapper');
+            if (sidebar.classList.contains('collapsed')) {
+                sidebar.style.width = '70px';
+                sidebar.style.minWidth = '70px';
+                if (mainWrapper) mainWrapper.style.marginLeft = '70px';
+            } else {
+                sidebar.style.width = '260px';
+                sidebar.style.minWidth = '260px';
+                if (mainWrapper) mainWrapper.style.marginLeft = '260px';
+            }
+        });
+
+        collegePlanningToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            collegePlanningToggle.classList.toggle('active-dropdown');
+            if (collegePlanningSub.style.display === 'none') {
+                collegePlanningSub.style.display = 'block';
+            } else {
+                collegePlanningSub.style.display = 'none';
+            }
+        });
+
+        function selectSchool(element, schoolId) {
+            var cards = document.querySelectorAll('.school-card-mini');
+            cards.forEach(function (card) { card.classList.remove('active'); });
+            element.classList.add('active');
+
+            // Reset to Overview tab
+            var tabs = document.querySelectorAll('.tab');
+            tabs.forEach(function (tab) { tab.classList.remove('active'); });
+            var firstTab = document.querySelector('.tab[data-tab="overview"]');
+            if (firstTab) firstTab.classList.add('active');
+            var panels = document.querySelectorAll('.tab-content');
+            panels.forEach(function (panel) { panel.classList.remove('active'); });
+            var overviewPanel = document.getElementById('tab-overview');
+            if (overviewPanel) overviewPanel.classList.add('active');
+
+            // Fade animation on detail panel
+            var detailPanel = document.querySelector('.school-details-panel');
+            if (detailPanel) {
+                detailPanel.classList.remove('refreshing');
+                void detailPanel.offsetWidth; // trigger reflow
+                detailPanel.classList.add('refreshing');
+            }
+
+            if (schoolId) {
+                fetchSchoolData(schoolId);
+            }
+        }
+
+        function selectMajor(element, majorName) {
+            const pills = element.parentElement.querySelectorAll('.major-pill');
+            pills.forEach(p => {
+                p.classList.remove('active');
+                const ym = p.querySelector('.your-major');
+                if (ym) ym.style.display = 'none';
+            });
+            element.classList.add('active');
+            const ym = element.querySelector('.your-major');
+            if (ym) ym.style.display = 'inline-block';
+            document.getElementById('about-major-title').innerHTML = `About the ${majorName} Major <span style="font-size:10px;font-weight:500;text-transform:none;letter-spacing:0;color:var(--i60);">&nbsp;— matched to your interest</span>`;
+        }
+
+        function switchTab(element, tabId) {
+            var tabs = document.querySelectorAll('.tab');
+            tabs.forEach(function (tab) { tab.classList.remove('active'); });
+            element.classList.add('active');
+
+            var panels = document.querySelectorAll('.tab-content');
+            panels.forEach(function (panel) { panel.classList.remove('active'); });
+
+            var target = document.getElementById('tab-' + tabId);
+            if (target) {
+                target.classList.add('active');
+            }
+        }
+
+        var subLinks = document.querySelectorAll('.sub-link');
+        subLinks.forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                subLinks.forEach(function (l) { l.classList.remove('active'); });
+                this.classList.add('active');
+            });
+        });
+
+        // ── Dynamic JSON Fetching ────────────────────────────────────────────────
+        const schoolDataFiles = {
+            'ut': 'UniversityOfTexasAustin_CDS_2024-2025.json',
+            'tam': 'TexasAMUniversity_CDS_2024-2025.json',
+            'usc': 'UniversityOfSouthCarolina_CDS_2024-2025.json',
+            'umich': 'UniversityOfMichigan_CDS_2025-2026.json',
+            'iu': 'IndianaUniversityBloomington_CDS_2024-2025.json',
+            'upenn': 'UniversityOfPennsylvania_CDS_2024-2025.json',
+            'harvard': 'HarvardUniversity_CDS_2024-2025.json',
+            'stanford': 'StanfordUniversity_CDS_2024-2025.json',
+            'nyu': 'NewYorkUniversity_CDS_2025-2026.json',
+            'yale': 'YaleUniversity_CDS_2025-2026.json',
+            'princeton': 'PrincetonUniversity_CDS_2025-2026.json',
+            'mit': 'MassachusettsInstituteOfTechnology_CDS_2024-2025.json',
+            'jhu': 'JohnsHopkinsUniversity_CDS_2025-2026.json',
+            'uchicago': 'UniversityOfChicago_CDS_2024-2025.json',
+            'ucb': 'UCBerkeley_CDS_2025-2026.json'
+        };
+
+        const FC = {
+            very_important: { w: 100, bg: '#5B2BE0', tc: '#fff' },
+            important: { w: 70, bg: '#7C3AED', tc: '#fff' },
+            considered: { w: 40, bg: '#d8b4fe', tc: '#5B2BE0' },
+            not_considered: { w: 8, bg: '#f1f5f9', tc: '#94a3b8', bdr: true },
+            not_used: { w: 4, bg: '#f1f5f9', tc: '#94a3b8', bdr: true, dim: true },
+        };
+
+        const CAT_C = { 'Essays': '#7c3aed', 'Test Scores': '#1d4ed8', 'Extracurriculars': '#059669', 'Application Strategy': '#991b1b', 'Academics': '#0369a1', 'Recommendations': '#6d28d9' };
+
+        async function fetchSchoolData(schoolId) {
+            const fileName = schoolDataFiles[schoolId];
+            if (!fileName) return; // Silent return if we don't have json for this school yet
+
+            try {
+                // Fetch using our Database API Client
+                const data = await dbAPI.getSchool(fileName);
+                renderSchoolData(data);
+            } catch (error) {
+                console.error("Failed to fetch school data:", error);
+            }
+        }
+
+        function renderSchoolData(data) {
+            const meta = data.cds_meta;
+            const cs = data.cds_admissions.class_size;
+
+            // ── Update detail panel header from JSON metadata ──
+            const logoLg = document.querySelector('.school-logo-large');
+            const schoolLogoMap = {
+                'University of Texas at Austin': 'assets/University of Texas at Austin.png',
+                'Texas A&M University': 'assets/Texas A&M University.png',
+                'University of South Carolina': 'assets/University of South Carolina.jpg',
+                'University of Michigan, Ann Arbor': 'assets/University of Michigan, Ann Arbor.png',
+                'University of Michigan': 'assets/University of Michigan, Ann Arbor.png',
+                'Indiana University Bloomington': 'assets/Indiana University Bloomington.png',
+                'University of Pennsylvania': 'assets/University of Pennsylvania.jpg',
+                'Harvard University': 'assets/Harvard University.jpg',
+                'Stanford University': 'assets/Stanford University.jpg'
+            };
+            if (logoLg) logoLg.src = schoolLogoMap[meta.school_name] || meta.logo_url || '';
+            const titleH2 = document.querySelector('.details-title-area h2');
+            if (titleH2) titleH2.textContent = meta.school_name;
+            const metaLg = document.querySelector('.school-meta-large');
+            if (metaLg) {
+                const rateDisplay = meta.admission_rate_display || (cs.acceptance_rate * 100).toFixed(1) + '%';
+                metaLg.innerHTML = `<span class="meta-item"><span class="meta-icon" style="color:#ef4444;">📍</span> ${meta.location}</span>
+                <span class="meta-item"><span class="meta-icon" style="color:#f59e0b;">🏆</span> ${meta.ranking}</span>
+                <span class="meta-item meta-green"><span class="meta-icon">✅</span> Admission Rate: ${rateDisplay}</span>
+                <a href="${meta.website}" class="link-website" target="_blank"><span class="meta-icon">🌐</span> Visit School Website</a>`;
+            }
+
+            // ── Update Overview tab ──
+            const ac = data.cds_academics;
+            const o = data.cds_outcomes;
+            if (document.getElementById('tab-overview')) {
+                document.getElementById('ov-description').textContent = meta.school_name + " is a " + (ac.institution_type || "university").toLowerCase() + " located in " + meta.location + ". It offers a wide range of academic programs and is known for its rigorous academic environment.";
+                document.getElementById('ov-setting').textContent = ac.setting;
+                document.getElementById('ov-type').textContent = ac.institution_type;
+                document.getElementById('ov-founded').textContent = meta.founded_year || "1800s";
+                document.getElementById('ov-enrollment').textContent = ac.undergrad_enrollment.toLocaleString();
+                document.getElementById('ov-ratio').textContent = ac.student_faculty_ratio + ':1';
+                document.getElementById('ov-grad').textContent = o.grad_rate_6yr + '%';
+                document.getElementById('ov-class-size').textContent = (ac.classes_under_20_pct || "50") + "% under 20 students";
+                document.getElementById('ov-retention').textContent = o.retention_rate_fulltime + '%';
+
+                const majorNames = ["Computer Science", "Business", "Engineering", "Biology", "Economics"];
+                const majorsColors = ['#6C4EF5', '#10B981', '#3B82F6', '#F59E0B', '#EF4444'];
+                let majorsHtml = "";
+                majorNames.forEach((m, idx) => {
+                    majorsHtml += `<div class="major-pill ${idx === 3 ? 'active' : ''}" onclick="selectMajor(this, '${m}')" style="cursor:pointer;transition:all 0.2s;">
+                        <span class="major-num" style="background:${majorsColors[idx]}">${idx + 1}</span>
+                        <span class="major-name">${m}</span>
+                        <span class="major-pct">${10 - idx}%</span>
+                        <span class="your-major" style="display:${idx === 3 ? 'inline-block' : 'none'}">Your major</span>
+                    </div>`;
+                });
+                document.getElementById('ov-majors').innerHTML = majorsHtml;
+                document.getElementById('about-major-title').innerHTML = `About the Biology Major <span style="font-size:10px;font-weight:500;text-transform:none;letter-spacing:0;color:var(--i60);">&nbsp;— matched to your interest</span>`;
+                document.getElementById('about-major-text').textContent = `The biology program at ${meta.school_name} is designed to provide students with a deep understanding of living systems, preparing them for leading roles in medicine, research, and biotechnology.`;
+                document.getElementById('about-major-reasons').innerHTML = `
+                  <li><i class="ti ti-circle-check"></i>State-of-the-art research facilities</li>
+                  <li><i class="ti ti-circle-check"></i>Access to leading medical centers</li>
+                  <li><i class="ti ti-circle-check"></i>Extensive undergraduate research opportunities</li>
+                `;
+                document.getElementById('student-traits-title').textContent = `What Kind of Students Does ${meta.school_name} Look For?`;
+                document.getElementById('student-traits-desc').textContent = `${meta.school_name} seeks students who will make distinctive contributions to the world — not just the most academically accomplished, but those with genuine intellectual curiosity, leadership, and character.`;
+                const TRAIT_ICONS = ['ti-medal', 'ti-bulb', 'ti-flag', 'ti-shield-check', 'ti-world', 'ti-star', 'ti-heart', 'ti-leaf', 'ti-compass', 'ti-book', 'ti-rocket'];
+                const randIcons = [...TRAIT_ICONS].sort(() => 0.5 - Math.random());
+                document.getElementById('student-traits-grid').innerHTML = `
+                  <div class="student-card"><div class="student-icon"><i class="ti ${randIcons[0]}"></i></div><div class="student-name">Academic Excellence</div><div class="student-desc">Mastery of challenging coursework</div></div>
+                  <div class="student-card"><div class="student-icon"><i class="ti ${randIcons[1]}"></i></div><div class="student-name">Intellectual Curiosity</div><div class="student-desc">Original thinking beyond the classroom</div></div>
+                  <div class="student-card"><div class="student-icon"><i class="ti ${randIcons[2]}"></i></div><div class="student-name">Leadership &amp; Impact</div><div class="student-desc">Demonstrated ability to lead and inspire</div></div>
+                  <div class="student-card"><div class="student-icon"><i class="ti ${randIcons[3]}"></i></div><div class="student-name">Character &amp; Ethics</div><div class="student-desc">Integrity, empathy, and moral courage</div></div>
+                  <div class="student-card"><div class="student-icon"><i class="ti ${randIcons[4]}"></i></div><div class="student-name">Service to Society</div><div class="student-desc">Commitment to making a broader difference</div></div>
+                `;
+                document.getElementById('campus-vibes-grid').innerHTML = `
+                  <div class="campus-card"><div class="campus-icon"><i class="ti ti-map-pin"></i></div><div class="campus-label">Location</div><div class="campus-val">${meta.location.split(',')[0]}</div><div class="campus-sub">${ac.setting}</div></div>
+                  <div class="campus-card"><div class="campus-icon"><i class="ti ti-sparkles"></i></div><div class="campus-label">Campus Vibe</div><div class="campus-val">Dynamic</div><div class="campus-sub">Ambitious, collaborative, global</div></div>
+                  <div class="campus-card"><div class="campus-icon"><i class="ti ti-users"></i></div><div class="campus-label">Diversity</div><div class="campus-val">47%</div><div class="campus-sub">Students of color</div></div>
+                  <div class="campus-card"><div class="campus-icon"><i class="ti ti-home"></i></div><div class="campus-label">Housing</div><div class="campus-val">${ac.pct_freshmen_on_campus}%</div><div class="campus-sub">Freshmen live on campus</div></div>
+                  <div class="campus-card"><div class="campus-icon"><i class="ti ti-friends"></i></div><div class="campus-label">Clubs &amp; Orgs</div><div class="campus-val">450+</div><div class="campus-sub">Student organizations</div></div>
+                  <div class="campus-card"><div class="campus-icon"><i class="ti ti-trophy"></i></div><div class="campus-label">Athletics</div><div class="campus-val">NCAA</div><div class="campus-sub">Varsity sports</div></div>
+                `;
+            }
+
+            // ── Update Admissions tab ──
+            if (document.getElementById('tab-admissions')) {
+                document.getElementById('adm-applicants').textContent = cs.applicants_total.toLocaleString();
+                document.getElementById('adm-admitted').textContent = cs.admitted_total.toLocaleString();
+                document.getElementById('adm-enrolled').textContent = cs.enrolled_total.toLocaleString();
+                document.getElementById('adm-acceptance').textContent = (cs.acceptance_rate * 100).toFixed(cs.acceptance_rate < 0.1 ? 2 : 1) + '%';
+                document.getElementById('adm-yield').textContent = (cs.yield_rate * 100).toFixed(1) + '%';
+
+                const ep = data.cds_admissions.early_programs;
+                let eaTags = '';
+                if (ep.early_action && ep.early_action.offered) eaTags += `<span class="eab eaon">${ep.early_action.restrictive ? 'SCEA' : 'EA'}</span>`;
+                else eaTags += `<span class="eab eaoff">EA</span>`;
+                if (ep.early_decision && ep.early_decision.offered) eaTags += `<span class="eab eaon">ED</span>`;
+                else eaTags += `<span class="eab eaoff">ED</span>`;
+                document.getElementById('adm-ea-pills').innerHTML = eaTags;
+                document.getElementById('adm-ea-dead').textContent = (ep.early_action && ep.early_action.deadline) || (ep.early_decision && ep.early_decision.deadline) || "N/A";
+                document.getElementById('adm-ea-notif').textContent = (ep.early_action && ep.early_action.notification) || (ep.early_decision && ep.early_decision.notification) || "N/A";
+                document.getElementById('adm-ea-rest').textContent = (ep.early_action && ep.early_action.restrictive) ? "Yes" : "No";
+                document.getElementById('adm-ed').textContent = (ep.early_decision && ep.early_decision.offered) ? "Yes" : "No";
+
+                const tp = data.cds_admissions.test_scores.test_policy;
+                document.getElementById('adm-test-policy').textContent = tp === 'required' ? 'Standardized tests required' : tp === 'test_optional' ? 'Test-optional policy' : tp;
+                document.getElementById('adm-sat-pct').textContent = "54%"; // Mock
+                document.getElementById('adm-act-pct').textContent = "19%"; // Mock
+                document.getElementById('gpa-title').textContent = `GPA distribution (weighted) · avg ${data.cds_admissions.gpa_distribution.avg_gpa}`;
+                document.getElementById('factors-note').textContent = `${meta.school_name} marks key factors according to their institutional priorities.`;
+            }
+
+            // ── Update Finances & Outcomes tab ──
+            if (document.getElementById('tab-finances')) {
+                const finAid = data.cds_financials.financial_aid;
+                document.getElementById('fin-need-pct').textContent = finAid.pct_freshmen_with_need + '%';
+                document.getElementById('fin-met-pct').textContent = finAid.pct_need_fully_met + '%';
+                document.getElementById('fin-avg-aid').textContent = '$' + finAid.avg_need_based_aid_package.toLocaleString();
+                document.getElementById('fin-avg-grant').textContent = '$' + finAid.avg_need_based_scholarship.toLocaleString();
+                document.getElementById('fin-avg-loan').textContent = '$' + finAid.avg_need_based_loan.toLocaleString();
+                document.getElementById('fin-initiative-title').textContent = `${meta.school_name} Financial Aid Initiative`;
+                document.getElementById('fin-initiative-desc').textContent = finAid.hfai_note || `Generous financial aid program covering up to 100% of demonstrated need for eligible students.`;
+
+                document.getElementById('out-retention').textContent = o.retention_rate_fulltime + '%';
+                document.getElementById('out-grad4').textContent = o.grad_rate_4yr + '%';
+                document.getElementById('out-grad6').textContent = o.grad_rate_6yr + '%';
+
+                document.getElementById('out-rings').innerHTML = `
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                    <svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="46" fill="none" stroke="#f1f5f9" stroke-width="9"/><circle cx="55" cy="55" r="46" fill="none" stroke="#d8b4fe" stroke-width="9" stroke-dasharray="289.0" stroke-dashoffset="${(289 * (1 - o.grad_rate_4yr / 100)).toFixed(1)}" stroke-linecap="round" transform="rotate(-90 55 55)"/><text x="55" y="50" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="18" font-weight="800" fill="#1e293b">${o.grad_rate_4yr}%</text><text x="55" y="66" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">4 years</text></svg>
+                    <div style="font-size:11px;color:#64748b;text-align:center;font-family:monospace">4-year rate</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                    <svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="46" fill="none" stroke="#f1f5f9" stroke-width="9"/><circle cx="55" cy="55" r="46" fill="none" stroke="#a855f7" stroke-width="9" stroke-dasharray="289.0" stroke-dashoffset="${(289 * (1 - o.grad_rate_5yr / 100)).toFixed(1)}" stroke-linecap="round" transform="rotate(-90 55 55)"/><text x="55" y="50" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="18" font-weight="800" fill="#1e293b">${o.grad_rate_5yr}%</text><text x="55" y="66" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">5 years</text></svg>
+                    <div style="font-size:11px;color:#64748b;text-align:center;font-family:monospace">5-year rate</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                    <svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="46" fill="none" stroke="#f1f5f9" stroke-width="9"/><circle cx="55" cy="55" r="46" fill="none" stroke="#5B2BE0" stroke-width="9" stroke-dasharray="289.0" stroke-dashoffset="${(289 * (1 - o.grad_rate_6yr / 100)).toFixed(1)}" stroke-linecap="round" transform="rotate(-90 55 55)"/><text x="55" y="50" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="18" font-weight="800" fill="#1e293b">${o.grad_rate_6yr}%</text><text x="55" y="66" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">6 years</text></svg>
+                    <div style="font-size:11px;color:#64748b;text-align:center;font-family:monospace">6-year rate</div>
+                  </div>
+                `;
+                document.getElementById('out-rings-note').textContent = `The 4yr–6yr gap reflects leave terms, research fellowships, and joint degrees — all common paths at ${meta.school_name}.`;
+
+                document.getElementById('out-snap-type').textContent = ac.institution_type;
+                document.getElementById('out-snap-setting').textContent = ac.setting;
+                document.getElementById('out-snap-ratio').textContent = ac.student_faculty_ratio + ':1';
+                document.getElementById('out-snap-enroll').textContent = ac.undergrad_enrollment.toLocaleString();
+                document.getElementById('out-snap-freshmen').textContent = ac.pct_freshmen_on_campus + '%';
+            }
+
+            const t = data.cds_admissions.test_scores;
+            const SCORES = [
+                { l: 'SAT Composite', lo: t.sat_composite_25th, hi: t.sat_composite_75th, mn: 400, mx: 1600 },
+                { l: 'SAT Evidence-Based R&W', lo: t.sat_erw_25th, hi: t.sat_erw_75th, mn: 200, mx: 800 },
+                { l: 'SAT Math', lo: t.sat_math_25th, hi: t.sat_math_75th, mn: 200, mx: 800 },
+                { l: 'ACT Composite', lo: t.act_composite_25th, hi: t.act_composite_75th, mn: 1, mx: 36 },
+            ];
+
+            const g = data.cds_admissions.gpa_distribution;
+            const GPA_BANDS = [
+                { l: '4.0+', v: g.gpa_4_0_and_above, c: '#5B2BE0' },
+                { l: '3.75–3.99', v: g.gpa_3_75_to_3_99, c: '#7C3AED' },
+                { l: '3.50–3.74', v: g.gpa_3_50_to_3_74, c: '#a855f7' },
+                { l: '3.25–3.49', v: g.gpa_3_25_to_3_49, c: '#d8b4fe' },
+                { l: '3.00–3.24', v: g.gpa_3_0_to_3_24, c: '#d8b4fe' },
+            ];
+
+            const c = data.cds_financials.expenses;
+            const COA = [
+                { l: 'Tuition', v: c.tuition_outofstate, c: '#5B2BE0' },
+                { l: 'Room & Board', v: c.room_and_board, c: '#7C3AED' },
+                { l: 'Required Fees', v: c.required_fees, c: '#a855f7' },
+                { l: 'Books & Supplies', v: c.books_supplies, c: '#C7D2FE' },
+                { l: 'Transportation', v: 1100, c: '#A5B4FC' },
+                { l: 'Other Expenses', v: 2700, c: '#DDD6FE' },
+            ];
+            const COA_TOTAL = c.total_coa_outofstate || 91726;
+
+            const f = data.cds_admissions.factors;
+            const FACTORS = [
+                ['Rigor of secondary record', f.rigor_of_secondary_record],
+                ['Academic GPA', f.academic_gpa],
+                ['Application essay', f.application_essay],
+                ['Recommendations', f.recommendation],
+                ['Extracurricular activities', f.extracurricular_activities],
+                ['Character / personal qualities', f.character_personal_qualities],
+                ['Talent / ability', f.talent_ability],
+                ['Interview', f.interview],
+                ['First generation', f.first_generation],
+                ['Alumni relation', f.alumni_relation],
+                ['Standardized test scores', f.standardized_test_scores],
+                ['Work experience', f.work_experience],
+                ['Class rank', f.class_rank],
+                ['Geographical residence', f.geographical_residence],
+                ['State residency', f.state_residency],
+                ['Religious affiliation', f.religious_affiliation],
+                ['Level of interest', f.level_of_applicant_interest],
+                ['Volunteer work', f.volunteer_work],
+            ];
+
+            // Render score bars
+            const sbEl = document.getElementById('score-bars');
+            if (sbEl) {
+                sbEl.innerHTML = '';
+                SCORES.forEach(s => {
+                    if (s.lo && s.hi) {
+                        const lft = ((s.lo - s.mn) / (s.mx - s.mn) * 100).toFixed(1);
+                        const wid = ((s.hi - s.lo) / (s.mx - s.mn) * 100).toFixed(1);
+                        sbEl.innerHTML += `<div class="sb"><div class="sbh"><span class="sbl">${s.l}</span><span class="sbv">${s.lo}–${s.hi}</span></div>
+                        <div class="sbt"><div class="sbf" style="left:${lft}%;width:${wid}%"></div>
+                        <div class="sbk" style="left:${lft}%"></div><div class="sbk" style="left:${parseFloat(lft) + parseFloat(wid)}%"></div></div>
+                        <div class="sbe"><span>${s.mn}</span><span>${s.mx}</span></div></div>`;
+                    }
+                });
+            }
+
+            // Render GPA bars
+            const gpaEl = document.getElementById('gpa-bars');
+            if (gpaEl) {
+                gpaEl.innerHTML = '';
+                GPA_BANDS.forEach(b => {
+                    const ins = b.v >= 10;
+                    gpaEl.innerHTML += `<div class="gpa-r"><span class="gpa-l">${b.l}</span>
+                    <div class="gpa-t"><div class="gpa-f" style="width:${b.v}%;background:${b.c}">
+                    ${ins ? `<span class="gpa-fl">${b.v}%</span>` : ''}</div></div>
+                    ${!ins ? `<span class="gpa-o">${b.v}%</span>` : ''}</div>`;
+                });
+            }
+
+            // Render COA bars
+            const coaEl = document.getElementById('coa-bars');
+            if (coaEl) {
+                coaEl.innerHTML = '';
+                COA.forEach(i => {
+                    if (i.v) {
+                        coaEl.innerHTML += `<div class="coa-i">
+                        <div class="coa-h"><span class="coa-lb">${i.l}</span><span class="coa-v">$${i.v.toLocaleString()}</span></div>
+                        <div class="coa-b"><div class="coa-bf" style="width:${(i.v / COA_TOTAL * 100).toFixed(1)}%;background:${i.c}"></div></div></div>`;
+                    }
+                });
+                const coaTotEl = document.getElementById('fin-coa-tot');
+                if (coaTotEl) coaTotEl.textContent = '$' + COA_TOTAL.toLocaleString();
+            }
+
+            // Render Factor bars
+            const fcEl = document.getElementById('factor-bars');
+            if (fcEl) {
+                fcEl.innerHTML = '';
+                FACTORS.forEach(([lbl, lvl]) => {
+                    const c = FC[lvl] || FC.not_used, ins = c.w >= 25;
+                    const formatLvl = (lvl || 'not_used').replace(/_/g, ' ');
+                    fcEl.innerHTML += `<div class="fcr"><span class="fcl">${lbl}</span>
+                    <div class="fct" style="${c.dim ? 'opacity:.45' : ''}">
+                    <div class="fcb" style="width:${c.w}%;background:${c.bg};${c.bdr ? 'border:1px solid var(--rule)' : ''}">
+                    ${ins ? `<span class="fcbl" style="color:${c.tc}">${formatLvl}</span>` : ''}</div>
+                    ${!ins ? `<span class="fcol">${formatLvl}</span>` : ''}</div></div>`;
+                });
+            }
+
+            // ── Update Fit Tab ──
+            if (document.getElementById('tab-fit') && data.cds_fit) {
+                const fit = data.cds_fit;
+                document.getElementById('fit-score').textContent = fit.score;
+                document.getElementById('fit-match').textContent = fit.match;
+                document.getElementById('fit-summary').textContent = fit.summary;
+                
+                document.getElementById('fit-academic-culture-cards').innerHTML = `
+                  <div class="card">
+                    <div class="ct">Academic Fit</div>
+                    <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;"><div style="font-size:40px;font-weight:800;color:var(--purple);line-height:1;font-family:'Plus Jakarta Sans',sans-serif;">${fit.academic.score}</div><div><div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px;">${fit.academic.label}</div><div style="font-size:11px;color:var(--i60);">${fit.academic.desc}</div></div></div>
+                    ${fit.academic.bars.map(b => `<div style="margin-bottom:10px;"><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--i60);margin-bottom:4px;"><span>${b.label}</span><span style="font-weight:600;color:${b.color === 'var(--purple)' ? 'var(--ink)' : b.color};">${b.our_val}</span></div><div style="height:6px;background:var(--i10);border-radius:3px;overflow:hidden;"><div style="width:${b.width}%;height:100%;background:${b.color};border-radius:3px;"></div></div></div>`).join('')}
+                  </div>
+                  <div class="card">
+                    <div class="ct">Culture Fit</div>
+                    <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;"><div style="font-size:40px;font-weight:800;color:var(--purple);line-height:1;font-family:'Plus Jakarta Sans',sans-serif;">${fit.culture.score}</div><div><div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px;">${fit.culture.label}</div><div style="font-size:11px;color:var(--i60);">${fit.culture.desc}</div></div></div>
+                    ${fit.culture.bars.map(b => `<div style="margin-bottom:10px;"><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--i60);margin-bottom:4px;"><span>${b.label}</span><span style="font-weight:600;color:${b.color};">${b.our_val}</span></div><div style="height:6px;background:var(--i10);border-radius:3px;overflow:hidden;"><div style="width:${b.width}%;height:100%;background:${b.color};border-radius:3px;"></div></div></div>`).join('')}
+                  </div>
+                `;
+                
+                document.getElementById('fit-strengths-gaps').innerHTML = `
+                  <div class="card">
+                    <div class="ct" style="color:#16a34a;border-left-color:#16a34a;background:#F0FDF4;"><i class="ti ti-circle-check" style="font-size:14px;"></i>Strengths</div>
+                    ${fit.strengths.map(s => `<div style="margin-bottom:12px;"><div class="sgt">${s.title}</div><div class="sgd">${s.desc}</div></div>`).join('')}
+                  </div>
+                  <div class="card">
+                    <div class="ct" style="color:#dc2626;border-left-color:#dc2626;background:#FEF2F2;"><i class="ti ti-alert-triangle" style="font-size:14px;"></i>Gaps</div>
+                    ${fit.gaps.map(g => `<div style="margin-bottom:12px;"><div class="sgt">${g.title}</div><div class="sgd">${g.desc}</div></div>`).join('')}
+                  </div>
+                `;
+
+                document.getElementById('fit-culture-desc').textContent = fit.culture_deep_dive.desc;
+                document.getElementById('fit-culture-bars').innerHTML = fit.culture_deep_dive.bars.map(b => `
+                  <div style="display:grid;grid-template-columns:180px 1fr auto;align-items:center;gap:16px;padding:10px 0;border-bottom:1px solid var(--i10);"><span style="font-size:12px;color:var(--i60);">${b.label}</span><div style="height:6px;background:var(--i10);border-radius:3px;overflow:hidden;"><div style="width:${b.width}%;height:100%;background:${b.color};border-radius:3px;"></div></div><span style="font-size:11px;font-weight:700;color:${b.tagColor};background:${b.tagBg};padding:2px 8px;border-radius:10px;white-space:nowrap;">${b.tag}</span></div>
+                `).join('');
+
+                document.getElementById('factor-analysis').innerHTML = fit.factor_analysis.map((item, i, arr) => {
+                    const vc = item.v === 'strong' ? '#16a34a' : item.v === 'meets' ? '#2563eb' : '#dc2626';
+                    const vbg = item.v === 'strong' ? '#f0fdf4' : item.v === 'meets' ? '#eff6ff' : '#fef2f2';
+                    return `<div style="display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:${i < arr.length - 1 ? '1px solid var(--bg-body)' : 'none'}">
+                    <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text-dark)">${item.f}</div>
+                    <div style="font-size:11px;color:var(--text-light);margin-top:2px">School expects: ${item.h}</div>
+                    <div style="font-size:11px;color:var(--text-muted)">Your profile: ${item.s}</div></div>
+                    <span style="font-size:11px;font-weight:700;color:${vc};background:${vbg};padding:3px 10px;border-radius:20px;flex-shrink:0;text-transform:capitalize">${item.v}</span></div>`;
+                }).join('');
+            }
+
+            // ── Update Chance Tab ──
+            if (document.getElementById('tab-chance') && data.cds_chance) {
+                const chance = data.cds_chance;
+                document.getElementById('chance-strategy-eyebrow').textContent = chance.eyebrow;
+                document.getElementById('chance-strategy-headline').textContent = chance.headline;
+                document.getElementById('chance-strategy-badges').innerHTML = chance.badges.map(b => `<span class="ai-bp">${b}</span>`).join('');
+                document.getElementById('chance-insight').textContent = chance.insight;
+                
+                document.getElementById('action-plan').innerHTML = chance.actions.map((a, i, arr) => {
+                    const pc = a.p === 'High' ? 'ph-h' : a.p === 'Medium' ? 'ph-m' : 'ph-l';
+                    const cc = CAT_C[a.cat] || '#888';
+                    return `<div class="ai-action" style="${i === arr.length - 1 ? 'border-bottom:none' : ''}">
+                    <div class="aim"><span class="ph ${pc}">${a.p} Priority</span>
+                    <span class="catb" style="background:${cc}18;color:${cc}">${a.cat}</span>
+                    <span class="atl">🗓 ${a.tl}</span></div>
+                    <div class="at">${a.t}</div><div class="ad">${a.d}</div></div>`;
+                }).join('');
+            }
+        }
+
+            // ── Major Search Autocomplete ──────────────────────────────────────────
+            const MAJORS = [
+                'Accounting', 'Aerospace Engineering', 'African American Studies', 'Agriculture', 'Anthropology',
+                'Applied Mathematics', 'Architecture', 'Art History', 'Biochemistry', 'Biology',
+                'Biomedical Engineering', 'Business Administration', 'Chemical Engineering', 'Chemistry',
+                'Civil Engineering', 'Communications', 'Computer Engineering', 'Computer Science',
+                'Criminal Justice', 'Data Science', 'Economics', 'Education', 'Electrical Engineering',
+                'English', 'Environmental Science', 'Film Studies', 'Finance', 'Graphic Design',
+                'Health Sciences', 'History', 'Hospitality Management', 'Human Resources',
+                'Industrial Engineering', 'Information Systems', 'International Relations',
+                'Journalism', 'Kinesiology', 'Linguistics', 'Management', 'Marketing',
+                'Mathematics', 'Mechanical Engineering', 'Music', 'Neuroscience', 'Nursing',
+                'Philosophy', 'Physics', 'Political Science', 'Pre-Law', 'Pre-Medicine',
+                'Psychology', 'Public Health', 'Public Policy', 'Religious Studies', 'Social Work',
+                'Sociology', 'Software Engineering', 'Spanish', 'Statistics', 'Theater Arts'
+            ];
+
+            const majorInput = document.getElementById('majorSearchInput');
+            const majorDropdown = document.getElementById('majorDropdown');
+            let highlightedIdx = -1;
+
+            function renderMajorDropdown(query) {
+                const q = query.trim().toLowerCase();
+                let filtered = q ? MAJORS.filter(m => m.toLowerCase().includes(q)) : MAJORS;
+                majorDropdown.innerHTML = '';
+                highlightedIdx = -1;
+                if (filtered.length === 0) {
+                    majorDropdown.innerHTML = '<div class="major-dropdown-empty">No majors found</div>';
+                } else {
+                    filtered.forEach((m, i) => {
+                        const div = document.createElement('div');
+                        div.className = 'major-dropdown-item';
+                        if (q) {
+                            const idx = m.toLowerCase().indexOf(q);
+                            div.innerHTML = m.substring(0, idx) + '<span class="match-highlight">' + m.substring(idx, idx + q.length) + '</span>' + m.substring(idx + q.length);
+                        } else {
+                            div.textContent = m;
+                        }
+                        div.addEventListener('click', function () {
+                            majorInput.value = m;
+                            majorDropdown.classList.remove('visible');
+                        });
+                        majorDropdown.appendChild(div);
+                    });
+                }
+                majorDropdown.classList.add('visible');
+            }
+
+            if (majorInput) {
+                majorInput.addEventListener('input', function () {
+                    if (this.value.trim().length > 0) {
+                        renderMajorDropdown(this.value);
+                    } else {
+                        majorDropdown.classList.remove('visible');
+                    }
+                });
+                majorInput.addEventListener('keydown', function (e) {
+                    const items = majorDropdown.querySelectorAll('.major-dropdown-item');
+                    if (e.key === 'ArrowDown') { e.preventDefault(); highlightedIdx = Math.min(highlightedIdx + 1, items.length - 1); items.forEach((it, i) => it.classList.toggle('highlighted', i === highlightedIdx)); items[highlightedIdx]?.scrollIntoView({ block: 'nearest' }); }
+                    else if (e.key === 'ArrowUp') { e.preventDefault(); highlightedIdx = Math.max(highlightedIdx - 1, 0); items.forEach((it, i) => it.classList.toggle('highlighted', i === highlightedIdx)); items[highlightedIdx]?.scrollIntoView({ block: 'nearest' }); }
+                    else if (e.key === 'Enter' && highlightedIdx >= 0 && items[highlightedIdx]) { e.preventDefault(); majorInput.value = items[highlightedIdx].textContent; majorDropdown.classList.remove('visible'); }
+                    else if (e.key === 'Escape') { majorDropdown.classList.remove('visible'); }
+                });
+                document.addEventListener('click', function (e) {
+                    if (!majorInput.contains(e.target) && !majorDropdown.contains(e.target)) {
+                        majorDropdown.classList.remove('visible');
+                    }
+                });
+            }
+
+            // ── Auto-fetch school data on load ────────────────────────────────────
+            document.addEventListener("DOMContentLoaded", () => {
+                const activeCard = document.querySelector('.school-card-mini.active');
+                if (activeCard) {
+                    const schoolId = activeCard.getAttribute('data-school');
+                    if (schoolId) fetchSchoolData(schoolId);
+                } else {
+                    fetchSchoolData('ut');
+                }
+            });
+    </script>
+</body>
+
+</html>

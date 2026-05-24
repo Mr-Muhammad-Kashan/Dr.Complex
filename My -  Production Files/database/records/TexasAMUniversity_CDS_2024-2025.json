@@ -1,0 +1,140 @@
+{
+  "cds_meta": {
+    "school_name": "Texas A&M University",
+    "ipeds_id": "228723",
+    "cds_year": "2024-2025",
+    "source_filename": "TexasAMUniversity_CDS_2024-2025.pdf",
+    "ingested_at": "2026-05-19T19:30:00.000000+00:00",
+    "confidence": "high",
+    "missing_sections": [],
+    "notes": "College Station campus. COA derived from tuition+fees+R&B+books. Grad rates from Fall 2018 cohort. Student-faculty ratio varies by source (19-21:1).",
+    "location": "College Station, Texas",
+    "ranking": "#41 National Ranking",
+    "admission_rate_display": "57%",
+    "website": "https://www.tamu.edu",
+    "logo_url": "https://placehold.co/130x130/500000/ffffff?text=A%26M",
+    "logo_mini_url": "https://placehold.co/80x80/500000/ffffff?text=A%26M",
+    "category": "likely"
+  },
+  "cds_admissions": {
+    "class_size": {
+      "applicants_total": 65634,
+      "applicants_men": 31500,
+      "applicants_women": 34134,
+      "applicants_other_gender": null,
+      "admitted_total": 35839,
+      "admitted_men": 16900,
+      "admitted_women": 18939,
+      "enrolled_total": 18483,
+      "enrolled_men": 9100,
+      "enrolled_women": 9383,
+      "acceptance_rate": 0.546,
+      "yield_rate": 0.5157
+    },
+    "early_programs": {
+      "early_decision": {
+        "offered": false,
+        "deadline": null,
+        "applicants": null,
+        "admitted": null,
+        "acceptance_rate": null
+      },
+      "early_action": {
+        "offered": true,
+        "restrictive": false,
+        "deadline": "10/15",
+        "notification_date": "Rolling",
+        "applicants": null,
+        "admitted": null,
+        "acceptance_rate": null
+      }
+    },
+    "factors": {
+      "rigor_of_secondary_record": "very_important",
+      "class_rank": "very_important",
+      "academic_gpa": "important",
+      "standardized_test_scores": "important",
+      "application_essay": "important",
+      "recommendation": "considered",
+      "interview": "not_considered",
+      "extracurricular_activities": "important",
+      "talent_ability": "considered",
+      "character_personal_qualities": "important",
+      "first_generation": "considered",
+      "alumni_relation": "not_considered",
+      "geographical_residence": "important",
+      "state_residency": "important",
+      "religious_affiliation": "not_considered",
+      "volunteer_work": "considered",
+      "work_experience": "considered",
+      "level_of_applicant_interest": "not_considered"
+    },
+    "test_scores": {
+      "test_policy": "required",
+      "sat_erw_25th": 570,
+      "sat_erw_75th": 680,
+      "sat_math_25th": 590,
+      "sat_math_75th": 720,
+      "sat_composite_25th": 1150,
+      "sat_composite_75th": 1440,
+      "act_composite_25th": 27,
+      "act_composite_75th": 32,
+      "pct_submitting_sat": 72,
+      "pct_submitting_act": 28
+    },
+    "gpa_distribution": {
+      "gpa_4_0_and_above": 44.8,
+      "gpa_3_75_to_3_99": 25.5,
+      "gpa_3_50_to_3_74": 14.2,
+      "gpa_3_25_to_3_49": 7.8,
+      "gpa_3_0_to_3_24": 4.3,
+      "gpa_2_50_to_2_99": 2.4,
+      "gpa_2_0_to_2_49": 0.8,
+      "gpa_below_2_0": 0.2,
+      "gpa_weighted": true,
+      "avg_gpa": 3.863
+    }
+  },
+  "cds_academics": {
+    "student_faculty_ratio": 18,
+    "calendar_system": "Semester",
+    "institution_type": "Public",
+    "undergrad_enrollment": 67996,
+    "total_enrollment": 74829,
+    "setting": "Suburban",
+    "pct_freshmen_on_campus": 52,
+    "pct_all_undergrads_on_campus": 22
+  },
+  "cds_financials": {
+    "expenses": {
+      "tuition_instate": 11964,
+      "tuition_outofstate": 41032,
+      "required_fees": 4458,
+      "room_and_board": 13008,
+      "books_supplies": 1200,
+      "total_coa_instate": 33180,
+      "total_coa_outofstate": 62272,
+      "coa_derived": true
+    },
+    "financial_aid": {
+      "pct_freshmen_with_need": 42,
+      "pct_need_fully_met": 18,
+      "avg_pct_of_need_met": 68,
+      "avg_need_based_aid_package": 17712,
+      "avg_need_based_scholarship": 11800,
+      "avg_need_based_self_help": 3900,
+      "avg_need_based_loan": 4200,
+      "pct_freshmen_no_need_receiving_merit": 15,
+      "avg_merit_scholarship_no_need": 4800,
+      "hfai_note": "Aggie Assurance: Families with income \u2264$60K \u2014 tuition and fees covered. Tuition support grants available for family incomes up to $130K."
+    }
+  },
+  "cds_outcomes": {
+    "retention_rate_fulltime": 94,
+    "grad_rate_4yr": 0.99,
+    "grad_rate_5yr": 78.5,
+    "grad_rate_6yr": 0.99,
+    "transfer_out_rate": null,
+    "cohort_year": 2018
+  }
+}

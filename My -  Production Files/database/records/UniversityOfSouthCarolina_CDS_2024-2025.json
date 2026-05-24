@@ -1,0 +1,140 @@
+{
+  "cds_meta": {
+    "school_name": "University of South Carolina",
+    "ipeds_id": "218663",
+    "cds_year": "2024-2025",
+    "source_filename": "UniversityOfSouthCarolina_CDS_2024-2025.pdf",
+    "ingested_at": "2026-05-19T19:30:00.000000+00:00",
+    "confidence": "high",
+    "missing_sections": [],
+    "notes": "Columbia campus. Test-optional policy. SAT/ACT ranges reflect submitters only. COA derived from tuition+fees+R&B+books.",
+    "location": "Columbia, South Carolina",
+    "ranking": "#76 National Ranking",
+    "admission_rate_display": "63%",
+    "website": "https://www.sc.edu",
+    "logo_url": "https://placehold.co/130x130/7f1d1d/ffffff?text=P%26F",
+    "logo_mini_url": "https://placehold.co/80x80/7f1d1d/ffffff?text=P%26F",
+    "category": "likely"
+  },
+  "cds_admissions": {
+    "class_size": {
+      "applicants_total": 46682,
+      "applicants_men": 19500,
+      "applicants_women": 27182,
+      "applicants_other_gender": null,
+      "admitted_total": 28706,
+      "admitted_men": 10500,
+      "admitted_women": 18206,
+      "enrolled_total": 7319,
+      "enrolled_men": 2900,
+      "enrolled_women": 4419,
+      "acceptance_rate": 0.6149,
+      "yield_rate": 0.2549
+    },
+    "early_programs": {
+      "early_decision": {
+        "offered": false,
+        "deadline": null,
+        "applicants": null,
+        "admitted": null,
+        "acceptance_rate": null
+      },
+      "early_action": {
+        "offered": true,
+        "restrictive": false,
+        "deadline": "10/15",
+        "notification_date": "12/15",
+        "applicants": null,
+        "admitted": null,
+        "acceptance_rate": null
+      }
+    },
+    "factors": {
+      "rigor_of_secondary_record": "very_important",
+      "class_rank": "considered",
+      "academic_gpa": "very_important",
+      "standardized_test_scores": "considered",
+      "application_essay": "important",
+      "recommendation": "considered",
+      "interview": "not_considered",
+      "extracurricular_activities": "important",
+      "talent_ability": "considered",
+      "character_personal_qualities": "important",
+      "first_generation": "considered",
+      "alumni_relation": "considered",
+      "geographical_residence": "important",
+      "state_residency": "important",
+      "religious_affiliation": "not_considered",
+      "volunteer_work": "considered",
+      "work_experience": "considered",
+      "level_of_applicant_interest": "considered"
+    },
+    "test_scores": {
+      "test_policy": "test_optional",
+      "sat_erw_25th": 600,
+      "sat_erw_75th": 680,
+      "sat_math_25th": 580,
+      "sat_math_75th": 680,
+      "sat_composite_25th": 1200,
+      "sat_composite_75th": 1320,
+      "act_composite_25th": 24,
+      "act_composite_75th": 30,
+      "pct_submitting_sat": 62,
+      "pct_submitting_act": 38
+    },
+    "gpa_distribution": {
+      "gpa_4_0_and_above": 35.2,
+      "gpa_3_75_to_3_99": 27.8,
+      "gpa_3_50_to_3_74": 17.5,
+      "gpa_3_25_to_3_49": 9.8,
+      "gpa_3_0_to_3_24": 5.4,
+      "gpa_2_50_to_2_99": 3.1,
+      "gpa_2_0_to_2_49": 0.9,
+      "gpa_below_2_0": 0.3,
+      "gpa_weighted": true,
+      "avg_gpa": 3.717
+    }
+  },
+  "cds_academics": {
+    "student_faculty_ratio": 23,
+    "calendar_system": "Semester",
+    "institution_type": "Public",
+    "undergrad_enrollment": 31489,
+    "total_enrollment": 35471,
+    "setting": "Urban",
+    "pct_freshmen_on_campus": 95,
+    "pct_all_undergrads_on_campus": 32
+  },
+  "cds_financials": {
+    "expenses": {
+      "tuition_instate": 12688,
+      "tuition_outofstate": 36298,
+      "required_fees": 400,
+      "room_and_board": 12558,
+      "books_supplies": 1076,
+      "total_coa_instate": 31222,
+      "total_coa_outofstate": 54832,
+      "coa_derived": true
+    },
+    "financial_aid": {
+      "pct_freshmen_with_need": 44,
+      "pct_need_fully_met": 22,
+      "avg_pct_of_need_met": 62,
+      "avg_need_based_aid_package": 16974,
+      "avg_need_based_scholarship": 10200,
+      "avg_need_based_self_help": 4100,
+      "avg_need_based_loan": 4300,
+      "pct_freshmen_no_need_receiving_merit": 28,
+      "avg_merit_scholarship_no_need": 7300,
+      "hfai_note": "Palmetto Fellows Scholarship and LIFE Scholarship available for qualifying South Carolina residents covering significant tuition costs."
+    }
+  },
+  "cds_outcomes": {
+    "retention_rate_fulltime": 90.5,
+    "grad_rate_4yr": 0.99,
+    "grad_rate_5yr": 67.3,
+    "grad_rate_6yr": 0.99,
+    "transfer_out_rate": null,
+    "cohort_year": 2018
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "cds_meta": {
+    "school_name": "Massachusetts Institute of Technology",
+    "ipeds_id": "166683",
+    "cds_year": "2024-2025",
+    "confidence": "high",
+    "source_filename": "MIT_CDS_2024-2025.html",
+    "mailing_address": "77 Massachusetts Avenue",
+    "city": "Cambridge",
+    "state": "MA",
+    "zip": "02139",
+    "country": "United States",
+    "website": "web.mit.edu",
+    "missing_sections": [],
+    "location": "Cambridge, MA",
+    "ranking": "#2 National Ranking",
+    "admission_rate_display": "5%",
+    "logo_url": "https://placehold.co/130x130/5B2BE0/ffffff?text=M",
+    "logo_mini_url": "https://placehold.co/80x80/5B2BE0/ffffff?text=M",
+    "category": "reach"
+  },
+  "cds_admissions": {
+    "class_size": {
+      "applicants_total": 28232,
+      "admitted_total": 1284,
+      "enrolled_total": 1106,
+      "acceptance_rate": 0.0455,
+      "yield_rate": 0.8614
+    },
+    "early_programs": {
+      "early_decision": {
+        "offered": false
+      },
+      "early_action": {
+        "offered": true,
+        "restrictive": false,
+        "deadline": "11/1",
+        "notification_date": "12/20"
+      }
+    },
+    "factors": {
+      "rigor_of_secondary_record": "important",
+      "academic_gpa": "important",
+      "application_essay": "important",
+      "recommendation": "important",
+      "extracurricular_activities": "important",
+      "character_personal_qualities": "very_important",
+      "talent_ability": "important",
+      "interview": "important",
+      "first_generation": "considered",
+      "state_residency": "not_considered",
+      "geographical_residence": "considered",
+      "alumni_relation": "not_considered",
+      "standardized_test_scores": "important",
+      "class_rank": "considered",
+      "religious_affiliation": "not_considered",
+      "level_of_applicant_interest": "not_considered",
+      "work_experience": "considered",
+      "volunteer_work": "considered"
+    },
+    "test_scores": {
+      "test_policy": "required",
+      "sat_composite_25th": 1520,
+      "sat_composite_75th": 1570,
+      "act_composite_25th": 34,
+      "act_composite_75th": 36,
+      "sat_erw_25th": 740,
+      "sat_erw_75th": 780,
+      "sat_math_25th": 780,
+      "sat_math_75th": 800,
+      "pct_submitting_sat": 83,
+      "pct_submitting_act": 29
+    },
+    "gpa_distribution": {
+      "avg_gpa": null,
+      "gpa_weighted": null,
+      "gpa_4_0_and_above": null,
+      "gpa_3_75_to_3_99": null,
+      "gpa_3_50_to_3_74": null,
+      "gpa_3_25_to_3_49": null,
+      "gpa_3_0_to_3_24": null
+    }
+  },
+  "cds_academics": {
+    "student_faculty_ratio": 3,
+    "institution_type": "private_nonprofit",
+    "setting": "urban",
+    "undergrad_enrollment": 4535,
+    "pct_freshmen_on_campus": 100
+  },
+  "cds_financials": {
+    "expenses": {
+      "tuition_outofstate": 64310,
+      "tuition_instate": null,
+      "room_and_board": 21264,
+      "total_coa_outofstate": 89340,
+      "total_coa_instate": null,
+      "required_fees": 420,
+      "books_supplies": 910,
+      "transportation": null,
+      "other_expenses": 2436
+    },
+    "financial_aid": {
+      "pct_need_fully_met": 100.0,
+      "avg_need_based_aid_package": 69036,
+      "avg_need_based_scholarship": 67740,
+      "avg_need_based_loan": 1623,
+      "pct_freshmen_with_need": 54.7,
+      "aid_policy_note": "Beginning in the 2025-26 school year, no expected parental contribution for families with income below $100,000 and typical assets; families with income up to $200,000 and typical assets are guaranteed free tuition."
+    }
+  },
+  "cds_outcomes": {
+    "retention_rate_fulltime": 99,
+    "grad_rate_6yr": 0.964,
+    "grad_rate_4yr": 0.827
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "cds_meta": {
+    "school_name": "University of Michigan, Ann Arbor",
+    "ipeds_id": "170976",
+    "cds_year": "2024-2025",
+    "source_filename": "UniversityOfMichiganAnnArbor_CDS_2024-2025.pdf",
+    "ingested_at": "2026-05-19T19:30:00.000000+00:00",
+    "confidence": "high",
+    "missing_sections": [],
+    "notes": "Test-optional policy. Record enrollment 52,855 in Fall 2024.",
+    "location": "Ann Arbor, Michigan",
+    "ranking": "#25 National Ranking",
+    "admission_rate_display": "20%",
+    "website": "https://umich.edu",
+    "logo_url": "https://placehold.co/130x130/00274c/ffcb05?text=M",
+    "logo_mini_url": "https://placehold.co/80x80/00274c/ffcb05?text=M",
+    "category": "target"
+  },
+  "cds_admissions": {
+    "class_size": {
+      "applicants_total": 97961,
+      "applicants_men": 47040,
+      "applicants_women": 50960,
+      "applicants_other_gender": null,
+      "admitted_total": 12772,
+      "admitted_men": 7032,
+      "admitted_women": 8256,
+      "enrolled_total": 7475,
+      "enrolled_men": 3478,
+      "enrolled_women": 3922,
+      "acceptance_rate": 0.1304,
+      "yield_rate": 0.585
+    },
+    "early_programs": {
+      "early_decision": {
+        "offered": false,
+        "deadline": null,
+        "applicants": null,
+        "admitted": null,
+        "acceptance_rate": null
+      },
+      "early_action": {
+        "offered": true,
+        "restrictive": false,
+        "deadline": "11/1",
+        "notification_date": "1/31",
+        "applicants": null,
+        "admitted": null,
+        "acceptance_rate": null
+      }
+    },
+    "factors": {
+      "rigor_of_secondary_record": "very_important",
+      "class_rank": "considered",
+      "academic_gpa": "very_important",
+      "standardized_test_scores": "important",
+      "application_essay": "very_important",
+      "recommendation": "important",
+      "interview": "considered",
+      "extracurricular_activities": "important",
+      "talent_ability": "important",
+      "character_personal_qualities": "very_important",
+      "first_generation": "important",
+      "alumni_relation": "considered",
+      "geographical_residence": "important",
+      "state_residency": "important",
+      "religious_affiliation": "not_considered",
+      "volunteer_work": "considered",
+      "work_experience": "considered",
+      "level_of_applicant_interest": "not_considered"
+    },
+    "test_scores": {
+      "test_policy": "test_optional",
+      "sat_erw_25th": 680,
+      "sat_erw_75th": 750,
+      "sat_math_25th": 690,
+      "sat_math_75th": 790,
+      "sat_composite_25th": 1320,
+      "sat_composite_75th": 1600,
+      "act_composite_25th": 32,
+      "act_composite_75th": 34,
+      "pct_submitting_sat": 58,
+      "pct_submitting_act": 42
+    },
+    "gpa_distribution": {
+      "gpa_4_0_and_above": 60.2,
+      "gpa_3_75_to_3_99": 23.8,
+      "gpa_3_50_to_3_74": 9.5,
+      "gpa_3_25_to_3_49": 3.8,
+      "gpa_3_0_to_3_24": 1.6,
+      "gpa_2_50_to_2_99": 0.8,
+      "gpa_2_0_to_2_49": 0.2,
+      "gpa_below_2_0": 0.1,
+      "gpa_weighted": true,
+      "avg_gpa": 3.975
+    }
+  },
+  "cds_academics": {
+    "student_faculty_ratio": 12,
+    "calendar_system": "Semester",
+    "institution_type": "Public",
+    "undergrad_enrollment": 31553,
+    "total_enrollment": 52855,
+    "setting": "Urban",
+    "pct_freshmen_on_campus": 97,
+    "pct_all_undergrads_on_campus": 30
+  },
+  "cds_financials": {
+    "expenses": {
+      "tuition_instate": 17864,
+      "tuition_outofstate": 57762,
+      "required_fees": 5718,
+      "room_and_board": 14050,
+      "books_supplies": 1048,
+      "total_coa_instate": 42180,
+      "total_coa_outofstate": 82078,
+      "coa_derived": true
+    },
+    "financial_aid": {
+      "pct_freshmen_with_need": 42,
+      "pct_need_fully_met": 75,
+      "avg_pct_of_need_met": 90,
+      "avg_need_based_aid_package": 31783,
+      "avg_need_based_scholarship": 23500,
+      "avg_need_based_self_help": 5200,
+      "avg_need_based_loan": 4800,
+      "pct_freshmen_no_need_receiving_merit": 14,
+      "avg_merit_scholarship_no_need": 8200,
+      "hfai_note": "Go Blue Guarantee: In-state students with family income \u2264$75K receive free tuition and fees for four years."
+    }
+  },
+  "cds_outcomes": {
+    "retention_rate_fulltime": 97,
+    "grad_rate_4yr": 0.99,
+    "grad_rate_5yr": 90.5,
+    "grad_rate_6yr": 0.99,
+    "transfer_out_rate": null,
+    "cohort_year": 2018
+  }
+}

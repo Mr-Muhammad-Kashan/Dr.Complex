@@ -1,0 +1,13 @@
+node_modules
+npm-debug.log*
+.env
+.env.local
+data
+*.db
+*.db-journal
+coverage
+.vitest-cache
+.DS_Store
+test
+.git
+.gitignore

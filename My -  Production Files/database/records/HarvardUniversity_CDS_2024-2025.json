@@ -1,0 +1,139 @@
+{
+  "cds_meta": {
+    "school_name": "Harvard University",
+    "ipeds_id": "166027",
+    "cds_year": "2024-2025",
+    "source_filename": "HarvardUniversity_CDS_2024-2025.pdf",
+    "ingested_at": "2026-05-18T00:26:03.247382+00:00",
+    "confidence": "high",
+    "missing_sections": [],
+    "notes": "SAT composite derived from ERW+Math sub-scores. COA computed from tuition+fees+R&B+books. Grad rates from Fall 2018 cohort rows D/E/F/G. H2 J/K/L/M values read from labeled rows. IPEDS ID is well-known. C7 parsed from column-aligned checkbox table. Volunteer work: no X marked \u2014 not_used.",
+    "location": "Unknown, Unknown",
+    "ranking": "#3 National Ranking",
+    "admission_rate_display": "4%",
+    "logo_url": "https://placehold.co/130x130/5B2BE0/ffffff?text=H",
+    "logo_mini_url": "https://placehold.co/80x80/5B2BE0/ffffff?text=H",
+    "category": "reach"
+  },
+  "cds_admissions": {
+    "class_size": {
+      "applicants_total": 56937,
+      "applicants_men": 26500,
+      "applicants_women": 30437,
+      "applicants_other_gender": 0,
+      "admitted_total": 1965,
+      "admitted_men": 950,
+      "admitted_women": 1015,
+      "enrolled_total": 1645,
+      "enrolled_men": 800,
+      "enrolled_women": 845,
+      "acceptance_rate": 0.0345,
+      "yield_rate": 0.837
+    },
+    "early_programs": {
+      "early_decision": {
+        "offered": false,
+        "deadline": null,
+        "applicants": null,
+        "admitted": null,
+        "acceptance_rate": null
+      },
+      "early_action": {
+        "offered": true,
+        "restrictive": true,
+        "deadline": "11/1",
+        "notification_date": "12/16",
+        "applicants": null,
+        "admitted": null,
+        "acceptance_rate": null
+      }
+    },
+    "factors": {
+      "rigor_of_secondary_record": "considered",
+      "class_rank": "not_considered",
+      "academic_gpa": "considered",
+      "standardized_test_scores": "considered",
+      "application_essay": "considered",
+      "recommendation": "considered",
+      "interview": "considered",
+      "extracurricular_activities": "considered",
+      "talent_ability": "considered",
+      "character_personal_qualities": "considered",
+      "first_generation": "considered",
+      "alumni_relation": "considered",
+      "geographical_residence": "not_considered",
+      "state_residency": "not_considered",
+      "religious_affiliation": "not_considered",
+      "volunteer_work": "not_used",
+      "work_experience": "not_considered",
+      "level_of_applicant_interest": "not_considered"
+    },
+    "test_scores": {
+      "test_policy": "required",
+      "sat_erw_25th": 740,
+      "sat_erw_75th": 780,
+      "sat_math_25th": 770,
+      "sat_math_75th": 800,
+      "sat_composite_25th": 1550,
+      "sat_composite_75th": 1550,
+      "act_composite_25th": 35,
+      "act_composite_75th": 36,
+      "pct_submitting_sat": 54,
+      "pct_submitting_act": 19
+    },
+    "gpa_distribution": {
+      "gpa_4_0_and_above": 72.41,
+      "gpa_3_75_to_3_99": 22.2,
+      "gpa_3_50_to_3_74": 4.11,
+      "gpa_3_25_to_3_49": 0.6,
+      "gpa_3_0_to_3_24": 0.17,
+      "gpa_2_50_to_2_99": 0.34,
+      "gpa_2_0_to_2_49": 0.17,
+      "gpa_below_2_0": 0,
+      "gpa_weighted": true,
+      "avg_gpa": 4
+    }
+  },
+  "cds_academics": {
+    "student_faculty_ratio": 9,
+    "calendar_system": "Semester",
+    "institution_type": "Private (nonprofit)",
+    "undergrad_enrollment": 8440,
+    "total_enrollment": 21189,
+    "setting": "Urban",
+    "pct_freshmen_on_campus": 100,
+    "pct_all_undergrads_on_campus": 97
+  },
+  "cds_financials": {
+    "expenses": {
+      "tuition_instate": null,
+      "tuition_outofstate": 59320,
+      "required_fees": 5476,
+      "room_and_board": 22130,
+      "books_supplies": 1000,
+      "total_coa_instate": null,
+      "total_coa_outofstate": 87926,
+      "coa_derived": true
+    },
+    "financial_aid": {
+      "pct_freshmen_with_need": 56.4,
+      "pct_need_fully_met": 100,
+      "avg_pct_of_need_met": 100,
+      "avg_need_based_aid_package": 71865,
+      "avg_need_based_scholarship": 73497,
+      "avg_need_based_self_help": 3149,
+      "avg_need_based_loan": 3558,
+      "pct_freshmen_no_need_receiving_merit": 0.2,
+      "avg_merit_scholarship_no_need": 6000,
+      "hfai_note": "Families with income <$85K attend free (tuition+housing+food+fees). $2,000 Launch Grant for juniors <$85K."
+    }
+  },
+  "cds_outcomes": {
+    "retention_rate_fulltime": 98,
+    "grad_rate_4yr": 0.99,
+    "grad_rate_5yr": 94.3,
+    "grad_rate_6yr": 0.99,
+    "transfer_out_rate": null,
+    "cohort_year": 2018
+  }
+}

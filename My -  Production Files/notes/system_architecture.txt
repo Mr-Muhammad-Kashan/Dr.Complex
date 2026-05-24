@@ -1,0 +1,14 @@
+# System Architecture
+
+## Overview
+The "DreamCollege" Customization (Version 2.0) is a decoupled frontend web application powered by a locally simulated JSON database and a Mock API Gateway.
+
+## How it Works
+1. Frontend UI: The main file is `College-List-Demo.html`. It serves as the single-page application (SPA).
+2. API Client: The `database/api_client.js` acts as our mock backend. When the UI needs data for a university, it calls `window.dbAPI.fetchSchoolData(schoolId)`.
+3. Validation: The API client checks if the provided API Key is valid by comparing it against `database/config.json`.
+4. Database: If valid, the API client fetches the raw data from `database/records/[school_name].json`, simulating a real backend database request.
+5. Rendering: The data is returned to the UI, which dynamically maps the JSON data points (e.g., acceptance rate, SAT scores) into the HTML DOM.
+
+## Why this Architecture?
+By moving away from hardcoded JavaScript objects to separate JSON files accessed via a mock API, we simulate an industrial-grade enterprise environment. This allows for seamless transitions to a real backend (Node.js, Python/Django) in the future without changing the frontend logic.

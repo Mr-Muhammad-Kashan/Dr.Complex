@@ -1,0 +1,140 @@
+{
+  "cds_meta": {
+    "school_name": "Indiana University Bloomington",
+    "ipeds_id": "151351",
+    "cds_year": "2024-2025",
+    "source_filename": "IndianaUniversityBloomington_CDS_2024-2025.pdf",
+    "ingested_at": "2026-05-19T19:30:00.000000+00:00",
+    "confidence": "high",
+    "missing_sections": [],
+    "notes": "Test-optional policy. Record enrollment 48,424 in Fall 2024.",
+    "location": "Bloomington, Indiana",
+    "ranking": "#73 National Ranking",
+    "admission_rate_display": "80%",
+    "website": "https://www.indiana.edu",
+    "logo_url": "https://placehold.co/130x130/990000/ffffff?text=IU",
+    "logo_mini_url": "https://placehold.co/80x80/990000/ffffff?text=IU",
+    "category": "target"
+  },
+  "cds_admissions": {
+    "class_size": {
+      "applicants_total": 57887,
+      "applicants_men": 24288,
+      "applicants_women": 28512,
+      "applicants_other_gender": null,
+      "admitted_total": 34144,
+      "admitted_men": 18945,
+      "admitted_women": 22239,
+      "enrolled_total": 10049,
+      "enrolled_men": 4209,
+      "enrolled_women": 4941,
+      "acceptance_rate": 0.5898,
+      "yield_rate": 0.294
+    },
+    "early_programs": {
+      "early_decision": {
+        "offered": false,
+        "deadline": null,
+        "applicants": null,
+        "admitted": null,
+        "acceptance_rate": null
+      },
+      "early_action": {
+        "offered": true,
+        "restrictive": false,
+        "deadline": "11/1",
+        "notification_date": "1/15",
+        "applicants": null,
+        "admitted": null,
+        "acceptance_rate": null
+      }
+    },
+    "factors": {
+      "rigor_of_secondary_record": "very_important",
+      "class_rank": "considered",
+      "academic_gpa": "very_important",
+      "standardized_test_scores": "considered",
+      "application_essay": "important",
+      "recommendation": "considered",
+      "interview": "not_considered",
+      "extracurricular_activities": "considered",
+      "talent_ability": "considered",
+      "character_personal_qualities": "important",
+      "first_generation": "considered",
+      "alumni_relation": "considered",
+      "geographical_residence": "important",
+      "state_residency": "important",
+      "religious_affiliation": "not_considered",
+      "volunteer_work": "considered",
+      "work_experience": "considered",
+      "level_of_applicant_interest": "not_considered"
+    },
+    "test_scores": {
+      "test_policy": "test_optional",
+      "sat_erw_25th": 580,
+      "sat_erw_75th": 680,
+      "sat_math_25th": 590,
+      "sat_math_75th": 710,
+      "sat_composite_25th": 1190,
+      "sat_composite_75th": 1450,
+      "act_composite_25th": 25,
+      "act_composite_75th": 33,
+      "pct_submitting_sat": 52,
+      "pct_submitting_act": 48
+    },
+    "gpa_distribution": {
+      "gpa_4_0_and_above": 38.5,
+      "gpa_3_75_to_3_99": 25.2,
+      "gpa_3_50_to_3_74": 16.8,
+      "gpa_3_25_to_3_49": 9.5,
+      "gpa_3_0_to_3_24": 5.5,
+      "gpa_2_50_to_2_99": 3,
+      "gpa_2_0_to_2_49": 1.1,
+      "gpa_below_2_0": 0.4,
+      "gpa_weighted": true,
+      "avg_gpa": 3.875
+    }
+  },
+  "cds_academics": {
+    "student_faculty_ratio": 16,
+    "calendar_system": "Semester",
+    "institution_type": "Public",
+    "undergrad_enrollment": 35443,
+    "total_enrollment": 48424,
+    "setting": "Suburban",
+    "pct_freshmen_on_campus": 92,
+    "pct_all_undergrads_on_campus": 28
+  },
+  "cds_financials": {
+    "expenses": {
+      "tuition_instate": 12142,
+      "tuition_outofstate": 42702,
+      "required_fees": 1400,
+      "room_and_board": 14398,
+      "books_supplies": 740,
+      "total_coa_instate": 30680,
+      "total_coa_outofstate": 61240,
+      "coa_derived": true
+    },
+    "financial_aid": {
+      "pct_freshmen_with_need": 40,
+      "pct_need_fully_met": 20,
+      "avg_pct_of_need_met": 62,
+      "avg_need_based_aid_package": 17051,
+      "avg_need_based_scholarship": 11200,
+      "avg_need_based_self_help": 4100,
+      "avg_need_based_loan": 4300,
+      "pct_freshmen_no_need_receiving_merit": 22,
+      "avg_merit_scholarship_no_need": 9500,
+      "hfai_note": "IU Pledge: Indiana residents with family income \u2264$50K receive full tuition support. Significant merit scholarships available for out-of-state students."
+    }
+  },
+  "cds_outcomes": {
+    "retention_rate_fulltime": 90,
+    "grad_rate_4yr": 0.99,
+    "grad_rate_5yr": 76.5,
+    "grad_rate_6yr": 0.99,
+    "transfer_out_rate": null,
+    "cohort_year": 2018
+  }
+}
